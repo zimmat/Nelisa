@@ -1,24 +1,57 @@
 exports.productNames = function(path) {
-  // console.log(path);
   var fs = require('fs');
-  var data = [];
+  var products = {};
 
-    var lines = fs.readFileSync(path, 'utf8');
+  var lines = fs.readFileSync(path, 'utf8');
   lines = lines.slice(0, -1);
-    var array = lines.split('\n');
-    var index = array.indexOf('Day,Date,stock item,No sold,Sales Price');
-if (index > -1) {
+  var array = lines.split('\n');
+  var index = array.indexOf('Day,Date,stock item,No sold,Sales Price');
+  if (index > -1) {
     array.splice(index, 1);
+  }
+
+  array.forEach(function(item) {
+    var productName = item.split(",")[2];
+    var productsQuantity = Number(item.split(",")[3]);
+
+    if (products[productName] === undefined) {
+      products[productName] = productsQuantity;
+    } else {
+      products[productName] += productsQuantity;
+    }
+  });
+  console.log(products);
+  return products;
+};
+exports.popularProduct = function(obj) {
+  var mostPopular = [];
+  var week = Object.keys(obj).map(function(key) {
+    return obj[key];
+  });
+  var max = Math.max.apply(null, week);
+  for (var pro in obj) {
+    if (obj[pro] === max) {
+      max = pro;
+      mostPopular.push(max);
+
+    }
+  }
+  console.log(mostPopular);
+  return mostPopular
 }
-console.log(index);
+exports.unpopularProduct = function(obj) {
+  leastPopular = [];
+  var week = Object.keys(obj).map(function(key) {
+    return obj[key];
+  });
+  var min = Math.min.apply(null, week);
+  for (var pro in obj) {
+    if (obj[pro] === min) {
+      min = pro;
+      leastPopular.push(min);
 
-    array.forEach(function(item){
-      var productName = item.split(",")[2];
-      if (data.indexOf(productName) === -1) {
-        data.push(productName);
-      }
-    });
-    // console.log(data);
-    return data
-
-  };
+    }
+  }
+  // console.log(leastPopular);
+  return leastPopular;
+}
