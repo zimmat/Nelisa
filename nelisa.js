@@ -20,7 +20,7 @@ exports.productNames = function(path) {
       products[productName] += productsQuantity;
     }
   });
-  console.log(products);
+   console.log(products);
   return products;
 };
 exports.popularProduct = function(obj) {
@@ -36,7 +36,6 @@ exports.popularProduct = function(obj) {
 
     }
   }
-  console.log(mostPopular);
   return mostPopular
 }
 exports.unpopularProduct = function(obj) {

@@ -74,20 +74,20 @@ var sweets = ['Mixed Sweets 5s','Heart Chocolates']
 var other = ['Rose (plastic)','Valentine Cards'];
 
 describe("Products", function() {
-  it('should return a product Names and quantity sold for week one', function() {
+  it('should return a product Names and quantity sold for map week one', function() {
     var results = nelisa.productNames('./week1.csv');
     assert.deepEqual(results,weekOne);
   });
-   it('should return a product Names and quantity sold for week two', function() {
+   it('should return a product Names and quantity sold for map week two', function() {
     var results = nelisa.productNames('./week2.csv');
     assert.deepEqual(results,weekTwo);
   });
- it('should return a product Names and quantity sold for week three', function() {
+ it('should return a product Names and quantity sold for map week three', function() {
     var results = nelisa.productNames('./week3.csv');
     assert.deepEqual(results,weekThree);
   });
 
-  it('should return a map with product Names and quantity sold for week four', function() {
+  it('should return a map with product Names and quantity sold for map week four', function() {
     var results = nelisa.productNames('./week4.csv');
     assert.deepEqual(results,weekFour);
   });
@@ -124,4 +124,16 @@ assert.deepEqual(results["Milk 1l","Coke 500ml"]);
     var results = nelisa.unpopularProduct(weekFour);
     assert.deepEqual(results,['Shampoo 1 litre']);
   });
+  it('should return a map for all categories for week one', function(){
+    var results = nelisa.categories(weekOne,fruit,grocerries,sweets,drinks,other);
+    assert.deepEqual(results,weekOnee ={fruit:{'Bananas - loose': 47,
+    'Apples - loose': 36,},grocerries:{'Milk 1l': 39, Imasi: 30,
+   Bread: 45,
+   'Chakalaka Can': 23,
+   'Gold Dish Vegetable Curry Can': 17,'Iwisa Pap 5kg': 17,
+   'Top Class Soy Mince': 22},drinks:{'Fanta 500ml': 33,
+   'Coke 500ml': 54,
+   'Cream Soda 500ml': 22}, other:{'Mixed Sweets 5s': 49}});
+
+ });
 });
