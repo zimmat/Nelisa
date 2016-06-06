@@ -1,6 +1,6 @@
-exports.productNames = function(path) {
+exports.productMap = function(path) {
   var fs = require('fs');
-  var products = {};
+  var productsMap = {};
 
   var lines = fs.readFileSync(path, 'utf8');
   lines = lines.slice(0, -1);
@@ -14,43 +14,54 @@ exports.productNames = function(path) {
     var productName = item.split(",")[2];
     var productsQuantity = Number(item.split(",")[3]);
 
-    if (products[productName] === undefined) {
-      products[productName] = productsQuantity;
+    if (productsMap[productName] === undefined) {
+      productsMap[productName] = productsQuantity;
     } else {
-      products[productName] += productsQuantity;
+      productsMap[productName] += productsQuantity;
     }
   });
-   console.log(products);
-  return products;
+  return productsMap;
 };
-exports.popularProduct = function(obj) {
-  var mostPopular = [];
+exports.popular = function(obj) {
+  var mostPopularProduct = [];
   var week = Object.keys(obj).map(function(key) {
     return obj[key];
   });
   var max = Math.max.apply(null, week);
-  for (var pro in obj) {
-    if (obj[pro] === max) {
-      max = pro;
-      mostPopular.push(max);
+  for (var product in obj) {
+    if (obj[product] === max) {
+      mostPopularProduct.push(product);
 
     }
   }
-  return mostPopular
+  return mostPopularProduct;
 }
-exports.unpopularProduct = function(obj) {
-  leastPopular = [];
+exports.unpopular = function(obj) {
+  leastPopularProduct = [];
   var week = Object.keys(obj).map(function(key) {
     return obj[key];
   });
   var min = Math.min.apply(null, week);
-  for (var pro in obj) {
-    if (obj[pro] === min) {
-      min = pro;
-      leastPopular.push(min);
+  for (var product in obj) {
+    if (obj[product] === min) {
+      leastPopularProduct.push(product);
 
     }
   }
-  // console.log(leastPopular);
-  return leastPopular;
+   console.log(leastPopularProduct);
+  return leastPopularProduct;
+}
+exports.getCategories = function(itemsMap,catMap){
+  var categoryMap = {};
+for(product in itemsMap){
+  var categories = catMap[product];
+  var quantity = itemsMap[product];
+  if(!itemsMap.hasOwnProperty(categories)){
+    categoryMap[categories] = 0;
+  }
+        categoryMap[categories] += quantity;
+}
+
+ // console.log(categoryMap);
+return categoryMap;
 }
