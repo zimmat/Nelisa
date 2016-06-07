@@ -140,7 +140,6 @@ describe("Products", function() {
     var results = nelisa.productMap('./week4.csv');
     assert.deepEqual(results,weekFour);
   });
-
   it('should return the most popular Product for week one',function(){
     var results = nelisa.popular(weekOne);
     assert.deepEqual(results,['Coke 500ml']);

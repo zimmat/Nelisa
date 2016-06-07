@@ -23,33 +23,32 @@ exports.productMap = function(path) {
   return productsMap;
 };
 exports.popular = function(obj) {
-  var mostPopularProduct = [];
+  var mostPopular = [];
   var week = Object.keys(obj).map(function(key) {
     return obj[key];
   });
   var max = Math.max.apply(null, week);
   for (var product in obj) {
     if (obj[product] === max) {
-      mostPopularProduct.push(product);
+      mostPopular.push(product);
 
     }
   }
-  return mostPopularProduct;
+  return mostPopular;
 }
 exports.unpopular = function(obj) {
-  leastPopularProduct = [];
+  leastPopular = [];
   var week = Object.keys(obj).map(function(key) {
     return obj[key];
   });
   var min = Math.min.apply(null, week);
   for (var product in obj) {
     if (obj[product] === min) {
-      leastPopularProduct.push(product);
+      leastPopular.push(product);
 
     }
   }
-   console.log(leastPopularProduct);
-  return leastPopularProduct;
+  return leastPopular;
 }
 exports.getCategories = function(itemsMap,catMap){
   var categoryMap = {};
@@ -62,6 +61,5 @@ for(product in itemsMap){
         categoryMap[categories] += quantity;
 }
 
- // console.log(categoryMap);
 return categoryMap;
 }
