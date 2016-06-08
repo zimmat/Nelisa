@@ -122,21 +122,27 @@ toiletries: 25,
 fruit: 32,
 Sweets: 40 };
 
+var months = ['Jan','Feb','Mar'];
+
 describe("Products", function() {
-  it('should return a product Names and quantity sold map for week one', function() {
+  it('should return a product map for week one', function() {
     var results = nelisa.productMap('./week1.csv');
     assert.deepEqual(results,weekOne);
   });
-   it('should return a product Names and quantity sold for map week two', function() {
+  // it('should return sales map', function(){
+  //   var results = nelisa.salesMap('./purchases.csv');
+  //   assert.deepEqual(results);
+  // })
+   it('should return a product map week two', function() {
     var results = nelisa.productMap('./week2.csv');
     assert.deepEqual(results,weekTwo);
   });
- it('should return a product Names and quantity sold for map week three', function() {
+ it('should return a product map week three', function() {
     var results = nelisa.productMap('./week3.csv');
     assert.deepEqual(results,weekThree);
   });
 
-  it('should return a map with product Names and quantity sold for map week four', function() {
+  it('should return a map with product map week four', function() {
     var results = nelisa.productMap('./week4.csv');
     assert.deepEqual(results,weekFour);
   });
@@ -251,5 +257,9 @@ it('should return least popular category for week three',function(){
 it('should return least popular category for week four',function(){
   var results = nelisa.unpopular(categoryFour);
   assert.deepEqual(results,[ 'Soft Drinks' ]);
+});
+it('should return purchases made in januuary',function(){
+  var results = nelisa.getPurchases('./purchases.csv');
+  assert.deepEqual(results);
 });
 });

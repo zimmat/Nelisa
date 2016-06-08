@@ -5,9 +5,9 @@ exports.productMap = function(path) {
   var lines = fs.readFileSync(path, 'utf8');
   lines = lines.slice(0, -1);
   var array = lines.split('\n');
-  var index = array.indexOf('Day,Date,stock item,No sold,Sales Price');
-  if (index > -1) {
-    array.splice(index, 1);
+  var header = array.indexOf('Day,Date,stock item,No sold,Sales Price');
+  if (header > -1) {
+    array.splice(header, 1);
   }
 
   array.forEach(function(item) {
@@ -63,3 +63,22 @@ for(product in itemsMap){
 
 return categoryMap;
 }
+exports.getPurchases = function(path){
+  var fs = require('fs');
+  var janData = [];
+
+  var lines = fs.readFileSync(path, 'utf8');
+  lines = lines.slice(0, -1);
+  var array = lines.split('\n');
+  array = array.splice(0);
+
+  array.forEach(function(string) {
+    string = string.split(';');
+    console.log(string);
+if(string[i] ==='Jan'){
+  janData.push(i);
+}
+});
+console.log(janData);
+return janData
+};
