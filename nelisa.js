@@ -63,22 +63,41 @@ for(product in itemsMap){
 
 return categoryMap;
 }
-exports.getPurchases = function(path){
+exports.getPurchases = function(path,week){
+    // console.log(week);
   var fs = require('fs');
-  var janData = [];
+  var weekPurchases = [];
+  var weeklyPurchases = {};
 
   var lines = fs.readFileSync(path, 'utf8');
   lines = lines.slice(0, -1);
   var array = lines.split('\n');
-  array = array.splice(0);
+  var header = array.indexOf('Shop;Date;Item;Quantity;Cost;Total Cost');
 
-  array.forEach(function(string) {
+  if (header > -1) {
+    array.splice(header, 1);
+    // console.log(array);
+  }
+array.forEach(function(string) {
     string = string.split(';');
-    console.log(string);
-if(string[i] ==='Jan'){
-  janData.push(i);
-}
-});
-console.log(janData);
-return janData
+    week.forEach(function(date){
+      if(string.indexOf(date) >-1){
+        weekPurchases.push(string);
+      }
+    });
+  });
+  weekPurchases.forEach(function(sales){
+    var itempurchased = sales[2];
+    var totalCoast = sales[5];
+    console.log(totalCoast);
+    if(!weeklyPurchases[itempurchased]){
+      weeklyPurchases[itempurchased] = 0;
+    } else{
+      weeklyPurchases[itempurchased] += totalCoast;
+    }
+
+
+  })
+   console.log(weeklyPurchases);
+  return weeklyPurchases;
 };
