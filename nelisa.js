@@ -22,20 +22,21 @@ exports.productMap = function(path) {
   });
   return productsMap;
 };
-exports.popular = function(obj) {
+exports.popular = function(salesData) {
   var mostPopular = [];
-  var week = Object.keys(obj).map(function(key) {
-    return obj[key];
+  var week = Object.keys(salesData).map(function(key) {
+    return salesData[key];
   });
   var max = Math.max.apply(null, week);
-  for (var product in obj) {
-    if (obj[product] === max) {
+  for (var product in salesData) {
+    if (salesData[product] === max) {
       mostPopular.push(product);
 
     }
   }
   return mostPopular;
 }
+
 exports.unpopular = function(obj) {
   leastPopular = [];
   var week = Object.keys(obj).map(function(key) {
@@ -60,11 +61,10 @@ for(product in itemsMap){
   }
         categoryMap[categories] += quantity;
 }
-
+console.log(categoryMap);
 return categoryMap;
 }
 exports.getPurchases = function(path,week){
-    // console.log(week);
   var fs = require('fs');
   var weekPurchases = [];
   var weeklyPurchases = {};
@@ -76,28 +76,43 @@ exports.getPurchases = function(path,week){
 
   if (header > -1) {
     array.splice(header, 1);
-    // console.log(array);
+     console.log(array);
   }
-array.forEach(function(string) {
-    string = string.split(';');
+array.forEach(function(purchaseData) {
+    purchaseData = purchaseData.split(';');
     week.forEach(function(date){
-      if(string.indexOf(date) >-1){
-        weekPurchases.push(string);
+      if(purchaseData.indexOf(date) >-1){
+        weekPurchases.push(purchaseData);
+
       }
     });
   });
   weekPurchases.forEach(function(sales){
     var itempurchased = sales[2];
     var totalCoast = sales[5];
-    console.log(totalCoast);
-    if(!weeklyPurchases[itempurchased]){
-      weeklyPurchases[itempurchased] = 0;
-    } else{
-      weeklyPurchases[itempurchased] += totalCoast;
+    totalCoast = totalCoast.replace(/R/g,'');
+    totalCoast = totalCoast.replace(",",".");
+    // console.log('coooooost', totalCoast);
+    if(!weeklyPurchases[itempurchased] ){
+        weeklyPurchases[itempurchased] = 0;
     }
-
-
-  })
-   console.log(weeklyPurchases);
+weeklyPurchases[itempurchased] += parseFloat(totalCoast);
+  });
+  // console.log(weeklyPurchases);
   return weeklyPurchases;
 };
+
+exports.mostProfitable = function(purchasesData){
+  var maxProfit = [];
+  var week = Object.keys(purchasesData).map(function(key) {
+    return purchasesData[key];
+  });
+  var max = Math.max.apply(null, week);
+  for (var product in purchasesData) {
+    if (purchasesData[product] === max) {
+      maxProfit.push(product);
+
+    }
+  }
+  return maxProfit;
+}
