@@ -1,4 +1,28 @@
-exports.popularCategory = function(salesData) {
+exports.productMap = function(path) {
+  var fs = require('fs');
+  var productsMap = {};
+
+  var lines = fs.readFileSync(path, 'utf8');
+  lines = lines.slice(0, -1);
+  var array = lines.split('\n');
+  var header = array.indexOf('Day,Date,stock item,No sold,Sales Price');
+  if (header > -1) {
+    array.splice(header, 1);
+  }
+
+  array.forEach(function(item) {
+    var productName = item.split(",")[2];
+    var productsQuantity = Number(item.split(",")[3]);
+
+    if (productsMap[productName] === undefined) {
+      productsMap[productName] = productsQuantity;
+    } else {
+      productsMap[productName] += productsQuantity;
+    }
+  });
+  return productsMap;
+};
+exports.popular = function(salesData) {
   var mostPopular = [];
   var week = Object.keys(salesData).map(function(key) {
     return salesData[key];
@@ -13,7 +37,7 @@ exports.popularCategory = function(salesData) {
   return mostPopular;
 }
 
-exports.unpopularCategory = function(obj) {
+exports.unpopular = function(obj) {
   leastPopular = [];
   var week = Object.keys(obj).map(function(key) {
     return obj[key];
@@ -27,6 +51,32 @@ exports.unpopularCategory = function(obj) {
   }
   return leastPopular;
 }
+exports.salesMap = function(path) {
+  var fs = require('fs');
+  var sales = {};
+
+  var lines = fs.readFileSync(path, 'utf8');
+  lines = lines.slice(0, -1);
+  var array = lines.split('\n');
+  var header = array.indexOf('Day,Date,stock item,No sold,Sales Price');
+  if (header > -1) {
+    array.splice(header, 1);
+  }
+
+  array.forEach(function(item) {
+    var productName = item.split(",")[2];
+    var productPrice = item.split(",")[4];
+productPrice = productPrice.replace('R','');
+    if (sales[productName] === undefined) {
+      sales[productName] = 0;
+    } else {
+      sales[productName] += parseFloat(productPrice);
+    }
+  });
+  console.log(sales);
+  return sales;
+};
+
 exports.getCategories = function(itemsMap,catMap){
   var categoryMap = {};
 for(product in itemsMap){
@@ -37,9 +87,9 @@ for(product in itemsMap){
   }
         categoryMap[categories] += quantity;
 }
-console.log(categoryMap);
+// console.log(categoryMap);
 return categoryMap;
- }
+}
 exports.getPurchases = function(path,week){
   var fs = require('fs');
   var weekPurchases = [];
@@ -68,27 +118,12 @@ array.forEach(function(purchaseData) {
     var totalCoast = sales[5];
     totalCoast = totalCoast.replace(/R/g,'');
     totalCoast = totalCoast.replace(",",".");
-    // console.log('coooooost', totalCoast);
+    console.log('coooooost', totalCoast);
     if(!weeklyPurchases[itempurchased] ){
         weeklyPurchases[itempurchased] = 0;
     }
 weeklyPurchases[itempurchased] += parseFloat(totalCoast);
   });
-  // console.log(weeklyPurchases);
+  console.log(weeklyPurchases);
   return weeklyPurchases;
 };
-
-exports.mostProfitable = function(purchasesData,salesData){
-  var maxProfit = [];
-  for(product in purchasesData){
-    var purchasePrice = purchasesData[product];
-    console.log(purchasePrice);
-    var salesPrice = salesMap[product];
-    // console.log(salesPrice);
-    if(!itemsMap.hasOwnProperty(categories)){
-      // categoryMap[categories] = 0;
-    }
-          // categoryMap[categories] += q
-  return maxProfit;
-}
-}
