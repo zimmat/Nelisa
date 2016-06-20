@@ -32,6 +32,6 @@ array.forEach(function(purchaseData) {
     }
 weeklyPurchases[itempurchased] += parseFloat(totalCoast);
   });
-  // console.log(weeklyPurchases);
+  // console.log('purchases',weeklyPurchases);
   return weeklyPurchases;
 };

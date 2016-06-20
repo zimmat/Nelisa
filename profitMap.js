@@ -11,6 +11,6 @@ for(salesProduct in salesData){
        profitMap[product] = parseFloat(salesData[salesProduct]) - parseFloat(purchasesData[product]);
 }
 }
-//console.log(profitMap);
+// console.log(profitMap);
 return profitMap;
 }

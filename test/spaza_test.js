@@ -4,10 +4,10 @@ var popular = require('../popular');
 var leastPopular = require('../leastPopular');
 var makeCategories = require('../makeCategories');
 var getSalesData = require('../getSalesData');
-var salesMap = require('../salesMap');
+// var salesMap = require('../salesMap');
 var getPurchases = require('../getPurchases');
 var profitMap = require('../profitMap');
-var weekOne = makeObject('./files/week1.csv');
+
 var cats = {
   'Milk 1l': 'Dairy',
   'Imasi': 'Dairy',
@@ -32,14 +32,15 @@ var secondWeek = ['08-Feb', '09-Feb', '10-Feb', '11-Feb', '12-Feb', '13-Feb', '1
 var thirdWeek = ['15-Feb', '16-Feb', '17-Feb', '18-Feb', '19-Feb', '20-Feb', '21-Feb'];
 var fourthWeek = ['22-Feb', '23-Feb', '24-Feb', '25-Feb', '26-Feb', '28-Feb', '1-Mar'];
 
-
+var weekOne = makeObject('./files/week1.csv');
 var productCatOne = makeCategories(weekOne,cats);
 var weekOneSales = getSalesData('./files/week1.csv');
-var salesOne = salesMap(weekOne,weekOneSales);
+// console.log(weekOneSales);
+// var salesOne = salesMap(weekOne,weekOneSales);
 var purchasesOne = getPurchases('./files/purchases.csv',firstWeek);
 var wkOnePurchaseCat = makeCategories(purchasesOne,cats);
-var wkOneprofit = profitMap(salesOne,purchasesOne);
-console.log('profit',wkOneprofit);
+var wkOneprofit = profitMap(weekOneSales,purchasesOne);
+// console.log('profit',wkOneprofit);
 
 
 

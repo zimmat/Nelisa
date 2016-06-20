@@ -20,5 +20,6 @@ module.exports =  function(path) {
       productsMap[productName] += productsQuantity;
     }
   });
+  // console.log('products',productsMap);
   return productsMap;
 };

@@ -12,14 +12,15 @@ module.exports = function(path) {
 
   array.forEach(function(item) {
     var productName = item.split(",")[2];
+    var productQuantity = item.split(",")[3];
     var productPrice = item.split(",")[4];
 productPrice = productPrice.replace('R','');
     if (sales[productName] === undefined) {
-      sales[productName] = 0;
+      sales[productName] = (Number(productQuantity) * Number(productPrice ));
     } else {
-      sales[productName] += parseFloat(productPrice);
+      sales[productName] += Number(productQuantity) * Number(productPrice );
     }
   });
-  //console.log(sales);
+console.log('sales',sales);
   return sales;
 };
