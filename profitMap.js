@@ -6,7 +6,7 @@ for(salesProduct in salesData){
   for(product in purchasesData){
     var purchaseCost = product;
     if(sales == purchaseCost){
-       profitMap[product] = 0;
+       profitMap[product] = parseFloat(salesData[salesProduct]) - parseFloat(purchasesData[product]);
      }
        profitMap[product] = parseFloat(salesData[salesProduct]) - parseFloat(purchasesData[product]);
 }

@@ -21,6 +21,6 @@ productPrice = productPrice.replace('R','');
       sales[productName] += Number(productQuantity) * Number(productPrice );
     }
   });
-console.log('sales',sales);
+// console.log('sales',sales);
   return sales;
 };
