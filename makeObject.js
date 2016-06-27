@@ -12,7 +12,7 @@ module.exports =  function(path) {
 
   array.forEach(function(item) {
     var productName = item.split(",")[2];
-    var productsQuantity = Number(item.split(",")[3]);
+    var productsQuantity = parseFloat(item.split(",")[3]);
 
     if (productsMap[productName] === undefined) {
       productsMap[productName] = productsQuantity;

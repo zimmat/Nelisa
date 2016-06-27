@@ -7,6 +7,8 @@ var profitMap = require('./profitMap');
 var makeCategories = require('./makeCategories');
 var leastPopular = require('./leastPopular');
 var popular = require('./popular');
+var mostProfitableCat = require('./mostProfitableCat');
+var mostProfitableProduct = require('./mostProfitableProduct');
 var firstWeek = ['01-Feb', '02-Feb', '03-Feb', '04-Feb', '05-Feb', '06-Feb', '6-Feb', '07-Feb'];
 
 var cats = {
@@ -36,8 +38,17 @@ var purchasesOne = getPurchases('./files/purchases.csv',firstWeek);
 var wkOnePurchaseCat = makeCategories(purchasesOne,cats);
 var wkOneProfit = profitMap(weekOneSales,purchasesOne);
 
+var popularProduct = popular(weekOne);
+var leastPopularProduct = leastPopular(weekOne);
+var mostPopularCat = popular(productCatOne);
+var leastPopularCat = leastPopular(productCatOne);
+var profitableProduct = mostProfitableProduct(wkOneProfit);
+var profitableCategory = mostProfitableCat(wkOnePurchaseCat);
+//console.log(profitableCategory);
+
 var source = fs.readFileSync('./views/layouts/display.handlebars', "utf8");
 var template = handlebars.compile(source);
-var context = popular(wkOneProfit);
+var context = [popularProduct,leastPopularProduct,mostPopularCat,leastPopularCat,profitableProduct,profitableCategory]
 var result = template(context);
+console.log(context);
 fs.writeFileSync('display.html', result);

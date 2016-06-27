@@ -1,12 +1,16 @@
 var assert = require('assert');
 var makeObject = require('../makeObject');
-var popular = require('../popular');
-var leastPopular = require('../leastPopular');
+var popularProduct = require('../popularProduct');
+var leastPopularProduct = require('../leastPopularProduct');
 var makeCategories = require('../makeCategories');
+var popularCategory = require('../popularCategory');
+var leastPopularCat = require('../leastPopularCat');
 var getSalesData = require('../getSalesData');
 // var salesMap = require('../salesMap');
 var getPurchases = require('../getPurchases');
 var profitMap = require('../profitMap');
+var mostProfitableCat = require('../mostProfitableCat');
+var mostProfitableProduct = require('../mostProfitableProduct');
 
 var cats = {
   'Milk 1l': 'Dairy',
@@ -40,33 +44,35 @@ var weekOneSales = getSalesData('./files/week1.csv');
 var purchasesOne = getPurchases('./files/purchases.csv',firstWeek);
 var wkOnePurchaseCat = makeCategories(purchasesOne,cats);
 var wkOneprofit = profitMap(weekOneSales,purchasesOne);
-// console.log('profit',wkOneprofit);
+var wkOneProdprofit = mostProfitableProduct(wkOneprofit);
+var wkOneMaxCatProfit = mostProfitableCat(wkOnePurchaseCat);
 
 
 
 describe('popular', function() {
       it('should return the most popular Product for week one', function() {
-        var results = popular(weekOne);
-        assert.deepEqual(results, ['Coke 500ml']);
+        var results = popularProduct(weekOne);
+        assert.deepEqual(results, { product: 'Coke 500ml', quantity: 54 });
       });
       it('should return the least popular Product for week one', function() {
-          var results = leastPopular(weekOne);
-          assert.deepEqual(results, [ 'Shampoo 1 litre' ]);
+          var results = leastPopularProduct(weekOne);
+          assert.deepEqual(results, { product: 'Shampoo 1 litre', quantity: 3 }
+);
         });
         it('should return the most popular category for week one', function() {
-          var results = popular(productCatOne);
-          assert.deepEqual(results, ["Sweets"]);
+          var results = popularCategory(productCatOne);
+          assert.deepEqual(results, { category: 'Sweets', quantity: 98 });
         });
         it('should return the least popular Product for week one', function() {
-            var results = leastPopular(productCatOne);
-            assert.deepEqual(results, ["toiletries"]);
+            var results = leastPopularCat(productCatOne);
+            assert.deepEqual(results, { category: 'toiletries', quantity: 24 });
           });
           it('should return the most profitable product for week one', function() {
-            var results = popular(wkOneprofit);
-            assert.deepEqual(results, ["Bananas - loose"]);
+            var results = mostProfitableProduct(wkOneprofit);
+            assert.deepEqual(results, {"product":"Bananas - loose","profit":"R88.00"});
           });
           it('should return the most profitable category for week one', function() {
-            var results = popular(wkOnePurchaseCat);
-            assert.deepEqual(results, ["Sweets"]);
+            var results = mostProfitableCat(wkOnePurchaseCat);
+            assert.deepEqual(results,  {"category":"Sweets","profit":"R3780.00"});
           });
       });

@@ -4,11 +4,11 @@ module.exports = function(quantityData) {
     return quantityData[key];
   });
   var min = Math.min.apply(null, week);
-  for (var product in quantityData) {
-    if (quantityData[product] === min) {
-      min = quantityData[product];
+  for (var category in quantityData) {
+    if (quantityData[category] === min) {
+      min = quantityData[category];
       leastPopular = {
-        product: product,
+        category: category,
         quantity:(min)
       };
 

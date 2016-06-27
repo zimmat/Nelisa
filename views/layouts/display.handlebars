@@ -5,10 +5,19 @@
     <title>Sales Report</title>
 </head>
 <body>
-  <div id = "render_here"> most profitable product</div>
-  <script id="profitable-template" type="text/x-handlebars-template">
-    <p>The most profitable product is {{{keys}}}</p>
-  </script>
+  <div id = "render_here"> Sales statistics for week one</div>
+  <div>
+    <ul>
+    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
+    <li>the least popular product is {{product}} with {{quantity}} number of sales</li>
+    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
+    <li>the most popular category is {{category}} with {{quantity}} number of sales</li>
+    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
+    <li>the least popular category is {{category}} with {{quantity}} number of sales</li>
+  <li>The most profitable product is {{product}} with this price {{profit}}</li>
+  <li>The most profitable category is {{category}} with this price {{profit}}</li>
+</ul>
+  </div>
 
   <script src="handlebars-v4.0.5.js"></script>
   <script src="app.js"></script>

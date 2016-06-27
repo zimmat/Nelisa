@@ -4,11 +4,11 @@ module.exports = function(quantityData) {
     return quantityData[key];
   });
   var max = Math.max.apply(null, week);
-  for (var product in quantityData) {
-    if (quantityData[product] === max) {
-      max = quantityData[product];
+  for (var category in quantityData) {
+    if (quantityData[category] === max) {
+      max = quantityData[category];
       mostPopular = {
-        product: product,
+        category: category,
       quantity:(max)
 
     };
