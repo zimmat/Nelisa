@@ -8,12 +8,13 @@ module.exports = function(quantityData) {
     if (quantityData[category] === max) {
       max = quantityData[category];
       mostPopular = {
-        category: category,
+        description:"most popular category ",
+        name: category,
       quantity:(max)
 
     };
   }
 }
-console.log(mostPopular);
+// console.log(mostPopular);
   return mostPopular;
 }

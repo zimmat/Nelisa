@@ -1,13 +1,18 @@
-module.exports = function(itemsMap,catMap){
+module.exports = function(itemsMap, catMap) {
+  console.log("itemsMap", itemsMap);
   var categoryMap = {};
-for(product in itemsMap){
-  var categories = catMap[product];
-  var quantity = itemsMap[product];
-  if(!itemsMap.hasOwnProperty(categories)){
-    categoryMap[categories] = quantity;
+  for (product in itemsMap) {
+    var categories = catMap[product];
+    var quantity = itemsMap[product];
+    console.log(quantity);
+    if (!categoryMap.hasOwnProperty(categories)) {
+      categoryMap[categories] = quantity;
+    } else {
+      categoryMap[categories] += quantity;
+    }
+
   }
-        categoryMap[categories] += quantity;
+
+  // console.log("category", categoryMap);
+  return categoryMap;
 }
-//console.log(categoryMap);
-return categoryMap;
- }

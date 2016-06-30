@@ -8,7 +8,8 @@ module.exports = function(productProfitData) {
     if (productProfitData[product] === max) {
       max = productProfitData[product];
       mostProfitableProduct = {
-        product: product,
+        description: "most profitable product",
+        name: product,
         profit:(max).toFixed(2).replace('','R')
       };
 

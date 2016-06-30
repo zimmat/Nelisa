@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Sales Report</title>
+  <meta charset="utf-8">
+  <title>Sales Report</title>
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
+
 <body>
-  <div id = "render_here"> Sales statistics for week one</div>
-  <div>
+  <div id="render_here"> <h1>Sales statistics for week one</h1></div>
+  <div class="collection">
     <ul>
-    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
-    <li>the least popular product is {{product}} with {{quantity}} number of sales</li>
-    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
-    <li>the most popular category is {{category}} with {{quantity}} number of sales</li>
-    <li>the most popular product is {{product}} with {{quantity}} number of sales</li>
-    <li>the least popular category is {{category}} with {{quantity}} number of sales</li>
-  <li>The most profitable product is {{product}} with this price {{profit}}</li>
-  <li>The most profitable category is {{category}} with this price {{profit}}</li>
-</ul>
+      {{#popular}}
+        <li class="collection-item active">The {{description}}is {{name}} with {{quantity}} sales</li>
+      {{/popular}}
+      {{#profit}}
+      <li class="collection-item">The {{description}} is {{name}} with {{profit}} profit</li>
+      {{/profit}}
+    </ul>
   </div>
 
-  <script src="handlebars-v4.0.5.js"></script>
+  <script src="./js/handlebars-v4.0.5.js"></script>
   <script src="app.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
+
 </html>

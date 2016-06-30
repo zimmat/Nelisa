@@ -28,10 +28,10 @@ array.forEach(function(purchaseData) {
     totalCoast = totalCoast.replace(",",".");
     // console.log('coooooost', totalCoast);
     if(!weeklyPurchases[itempurchased] ){
-        weeklyPurchases[itempurchased] = parseFloat(totalCoast);;
+        weeklyPurchases[itempurchased] = 0;
     }
 weeklyPurchases[itempurchased] += parseFloat(totalCoast);
   });
-  // console.log('purchases',weeklyPurchases);
+  //  console.log('weekOnepurchases',weeklyPurchases);
   return weeklyPurchases;
 };
