@@ -17,10 +17,11 @@ module.exports = function(path) {
 productPrice = productPrice.replace('R','');
     if (sales[productName] === undefined) {
       sales[productName] = (Number(productQuantity) * Number(productPrice ));
-    } else {
+    }
+    else {
       sales[productName] += Number(productQuantity) * Number(productPrice );
     }
   });
-// console.log('sales',sales);
+ console.log('week one salesMap',sales);
   return sales;
 };

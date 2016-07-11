@@ -8,7 +8,8 @@ module.exports = function(catProfitData) {
     if (catProfitData[cat] === max) {
       max = catProfitData[cat];
       mostProfitableCategory = {
-        category: cat,
+        description: "most profitable category",
+        name: cat,
         profit:(max).toFixed(2).replace('','R')
       };
 

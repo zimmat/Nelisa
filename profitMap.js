@@ -1,16 +1,16 @@
 module.exports = function(salesData,purchasesData){
+  // console.log("sales",salesData);
+  // console.log('purchase',purchasesData);
+
   var profitMap = {};
-  var profitable = " ";
 for(salesProduct in salesData){
-  var sales = salesProduct;
   for(product in purchasesData){
-    var purchaseCost = product;
-    if(sales == purchaseCost){
-       profitMap[product] = parseFloat(salesData[salesProduct]) - parseFloat(purchasesData[product]);
+    if(salesProduct == product){
+  profitMap[product] = salesData[salesProduct] - purchasesData[product];
      }
-       profitMap[product] = parseFloat(salesData[salesProduct]) - parseFloat(purchasesData[product]);
+
 }
 }
-// console.log(profitMap);
+// console.log("profit",profitMap);
 return profitMap;
 }

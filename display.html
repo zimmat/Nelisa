@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Sales Report</title>
-</head>
-<body>
-  <div id = "render_here"> most profitable product</div>
-  <script id="profitable-template" type="text/x-handlebars-template">
-    <p>The most profitable product is Bananas - loose with this price R88.00</p>
-  </script>
 
-  <script src="handlebars-v4.0.5.js"></script>
+<head>
+  <meta charset="utf-8">
+  <title>Sales Report</title>
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+  <div id="render_here"> <h1>Sales statistics for week one</h1></div>
+  <div class="collection">
+    <ul>
+        <li class="collection-item active">The most popular product is Coke 500ml with 54 sales</li>
+        <li class="collection-item active">The least popular product is Shampoo 1 litre with 3 sales</li>
+        <li class="collection-item active">The most popular category is Sweets with 49 sales</li>
+        <li class="collection-item active">The least popular category is toiletries with 12 sales</li>
+      <li class="collection-item">The most profitable product is Imasi with R654.00 profit</li>
+      <li class="collection-item">The most profitable category is Sweets with R720.00 profit</li>
+    </ul>
+  </div>
+
+  <script src="./js/handlebars-v4.0.5.js"></script>
   <script src="app.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
+
 </html>
