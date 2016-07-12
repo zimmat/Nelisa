@@ -1,21 +1,30 @@
 {
-  "name": "express-app",
-  "version": "0.0.0",
-  "main": "server.js",
+  "name": "Nelisa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
-    "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "express": "^4.14.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zimmat/Nelisa.git"
+  },
+  "keywords": [],
   "author": "",
-  "license": "BSD-2-Clause",
-  "description": ""
-},
-"engines": {
-  "node" : "4.4.7"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zimmat/Nelisa/issues"
+  },
+  "homepage": "https://github.com/zimmat/Nelisa#readme"
 }
