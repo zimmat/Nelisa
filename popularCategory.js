@@ -8,7 +8,7 @@ module.exports = function(quantityData) {
     if (quantityData[category] === max) {
       max = quantityData[category];
       mostPopular = {
-        description:"most popular category ",
+        description:"Most popular category ",
         name: category,
       quantity:(max)
 

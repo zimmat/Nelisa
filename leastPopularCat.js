@@ -8,7 +8,7 @@ module.exports = function(quantityData) {
     if (quantityData[category] === min) {
       min = quantityData[category];
       leastPopular = {
-        description: "least popular category ",
+        description: "Least popular category ",
         name: category,
         quantity:(min)
       };

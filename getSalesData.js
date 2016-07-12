@@ -22,6 +22,6 @@ productPrice = productPrice.replace('R','');
       sales[productName] += Number(productQuantity) * Number(productPrice );
     }
   });
- console.log('week one salesMap',sales);
+ // console.log('week one salesMap',sales);
   return sales;
 };
