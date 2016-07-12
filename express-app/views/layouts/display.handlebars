@@ -3,59 +3,46 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Sales Report</title>
-
-  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  media="screen,projection"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
+<style>
+  .jumbotron {
+    text-align: center;
+  }
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Nelisa's Spaza Shop</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Weekly Sales Statistics <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/sales/week1">week1</a></li>
+            <li><a href="/sales/week2">week2</a></li>
+            <li><a href="/sales/week3">week3</a></li>
+              <li><a href="/sales/week4">week4</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Page 2</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<body>
-  <div class="jumbotron"><h1>Weekly Sales statistics</h1></div>
-  <nav class="navbar navbar-default">
-  <div>
+{{{body}}}
 
-    <ul class="list-group">
-      {{#popular}}
-        <li class="list-group-item">The {{description}}is {{name}} with {{quantity}} sales</li>
-      {{/popular}}
-      {{#profit}}
-      <li class="list-group-item">The {{description}} is {{name}} with {{profit}} profit</li>
-      {{/profit}}
-    </ul>
 
-    <!-- <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Produ</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table> -->
-
-  </div>
-
-  <script src="server.js"></script>
-  <!-- <script type="text/javascript" src="js/bootstrap.m/in.js"></script> -->
+    <!-- <script type="text/javascript" src="js/bootstrap.m/in.js"></script> -->
 </body>
 
 </html>
