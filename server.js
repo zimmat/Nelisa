@@ -75,9 +75,9 @@ app.get('/', function(req, res){
 // create a route
 app.get('/sales/:week', function (req, res) {
   var week = req.params.week;
-  // if(Number(week.replace("week", "")) > 52){
-  //   return res.send("invalid week :" + week)
-  // }
+   if(Number(week.replace("week", "")) > 52){
+    return res.send("invalid week :" + week)
+   }
 
   var weeklyData = './files/' + week +".csv"
   var data = weeklyStats(weeklyData,'./files/purchases.csv');
