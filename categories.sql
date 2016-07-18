@@ -1,13 +1,6 @@
 USE nelisa;
 DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Products;
 CREATE TABLE Categories (id INT primary key auto_increment, Description char(100) not null);
-INSERT INTO Categories (id, Description) VALUES (1,"Bakery");
-INSERT INTO Categories (id, Description) VALUES (2,"Candy");
-INSERT INTO Categories (id, Description) VALUES (3,"Canned Food");
-INSERT INTO Categories (id, Description) VALUES (4,"Dairy");
-INSERT INTO Categories (id, Description) VALUES (5,"Fruit");
-INSERT INTO Categories (id, Description) VALUES (6,"Toiletries");
-INSERT INTO Categories (id, Description) VALUES (7,"Groceries");
-INSERT INTO Categories (id, Description) VALUES (8,"Other");
-INSERT INTO Categories (id, Description) VALUES (9,"Soft-Drinks");
 SELECT * FROM Categories;
+
