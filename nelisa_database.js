@@ -6,7 +6,7 @@ password : 'coder123',
 database : 'nelisa'
 });
 
-var sql = "INSERT INTO Categories(id, description) VALUES ?";
+var sql = "INSERT INTO categories(category_id, category_name) VALUES ?";
 
 //create a list of lists
 var values = [
@@ -15,10 +15,10 @@ var values = [
  [3,"Canned Food"],
  [4,"Dairy"],
  [5,"Fruit"],
- [6,"Toiletries"],
- [7,"Groceries"],
- [8,"Other"],
- [9,"Soft-Drinks"]
+ [6,"Groceries"],
+ [7,"Other"],
+ [8,"Soft-Drinks"],
+ [9,"Toiletries"]
 ];
 
 conn.query(sql, [values], function(err) {

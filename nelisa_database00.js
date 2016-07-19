@@ -6,28 +6,28 @@ password : 'coder123',
 database : 'nelisa'
 });
 
-var sql = "INSERT INTO products(id, description,categoryid) VALUES ?";
+var sql = "INSERT INTO products(product_id, product_name) VALUES ?";
 
 //create a list of lists
 var values = [
-  [1,'Milk 1l',"Dairy"],
-  [2,'Imasi',"Dairy"],
-  [3,'Bread',"Bakery"],
-  [4,'Chakalaka Can',"Canned Food"]
-  [5,'Gold Dish Vegetable Curry Can',"Canned Food"],
-  [6,'Fanta 500ml',"Soft-Drinks"],
-  [7,'Coke 500ml',"Soft-Drinks"],
-  [8,'Cream Soda 500ml',"Soft-Drinks"],
-  [9,'Iwisa Pap 5kg',"Groceries"],
-  [10,'Top Class Soy Mince',"Canned Food"],
-  [11,'Shampoo 1 litre',"Toiletries"],
-  [12,'Soap Bar',"Toiletries"],
-  [13,'Bananas - loose',"Fruit"],
-  [14,'Apples - loose',"Fruit"],
-  [15,'Mixed Sweets 5s',"Candy"],
-  [16,'Heart Chocolates',"Candy"],
-  [17,'Rose (plastic)',"Other"],
-  [18,'Valentine Cards',"Other"]
+  [1,'Bread'],
+  [2,'Mixed Sweets 5s'],
+  [3,'Heart Chocolates'],
+  [4,'Chakalaka Can'],
+  [5,'Gold Dish Vegetable Curry Can'],
+  [6,'Milk 1l'],
+  [7,'Imasi'],
+  [8,'Bananas - loose'],
+  [9,'Apples - loose'],
+  [10,'Top Class Soy Mince'],
+  [11,'Iwisa Pap 5kg'],
+  [12,'Rose (plastic)'],
+  [13,'Valentine Cards'],
+  [14,'Fanta 500ml'],
+  [15,'Coke 500ml'],
+  [16,'Cream Soda 500ml'],
+  [17,'Shampoo 1 litre'],
+  [18,'Soap Bar']
 ];
 
 conn.query(sql, [values], function(err) {

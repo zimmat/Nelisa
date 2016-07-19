@@ -6,7 +6,7 @@ password : 'coder123',
 database : 'nelisa'
 });
 
-var sql = "select * from categories";
+var sql = "select * from products";
 
 //map category name by category id
 conn.query(sql, function(err, Categories) {
