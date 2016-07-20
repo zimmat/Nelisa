@@ -1,4 +1,0 @@
-USE nelisa;
-DROP TABLE IF EXISTS products;
-CREATE TABLE products (id int primary key auto_increment,description char(100) not null);
-SELECT * FROM products;

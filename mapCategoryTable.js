@@ -8,9 +8,10 @@ database : 'nelisa'
 
 var sql = "select * from categories";
 
+
 //map category name by category id
-conn.query(sql, function(err, Categories) {
+conn.query(sql, function(err, categories) {
     if (err) return console.log(err);;
-    console.log(Categories);
+    console.log(categories);
     conn.end();
 });
