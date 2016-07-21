@@ -6,7 +6,7 @@ var conn = mysql.createConnection({
   database: 'nelisa'
 });
 
-var sql = "select category_id,product_name from products";
+var sql = "select product_id,product_name from products";
 
 conn.query(sql, function(err, products) {
     if (err) return console.log(err);;

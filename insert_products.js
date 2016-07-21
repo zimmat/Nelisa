@@ -8,7 +8,7 @@ database : 'nelisa'
 
 var sql = "INSERT INTO products(product_id, product_name,category_id) VALUES ?";
 
-//create a list of lists
+//bulk insert
 var values = [
   [1,'Bread',1],
   [2,'Mixed Sweets 5s',2],
