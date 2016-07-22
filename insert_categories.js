@@ -6,22 +6,41 @@ password : 'coder123',
 database : 'nelisa'
 });
 
-var sql = "INSERT INTO categories(category_id, category_name) VALUES ?";
+var sql = "INSERT INTO categories( category_name) VALUES ?";
 
-//create a list of lists
+//bulk insert
 var values = [
- [1,"Bakery"],
- [2,"Candy"],
- [3,"Canned Food"],
- [4,"Dairy"],
- [5,"Fruit"],
- [6,"Groceries"],
- [7,"Other"],
- [8,"Soft-Drinks"],
- [9,"Toiletries"]
+ ["Bakery"],
+ ["Candy"],
+ ["Canned Food"],
+ ["Dairy"],
+ ["Fruit"],
+ ["Groceries"],
+ ["Other"],
+ ["Soft-Drinks"],
+ ["Toiletries"]
 ];
 
 conn.query(sql, [values], function(err) {
     if (err) throw err;
-    conn.end();
-});
+  });
+
+  var productCategoryMap = {
+    'Milk 1l': 'Dairy',
+    'Imasi': 'Dairy',
+    'Bread': 'Bakery',
+    'Chakalaka Can': 'Canned Food',
+    'Gold Dish Vegetable Curry Can': 'Canned Food',
+    'Fanta 500ml': 'Soft-Drinks',
+    'Coke 500ml': 'Soft-Drinks',
+    'Cream Soda 500ml': 'Soft-Drinks',
+    'Iwisa Pap 5kg': 'Groceries',
+    'Top Class Soy Mince': 'Groceries',
+    'Shampoo 1 litre': 'toiletries',
+    'Soap Bar': 'toiletries',
+    'Bananas - loose': 'Fruit ',
+    'Apples - loose': 'Fruit ',
+    'Mixed Sweets 5s': 'Candy',
+    'Heart Chocolates': 'Candy',
+    'Rose (plastic)': 'Other  ',
+    'Valentine Cards': 'Other  '};
