@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var fs = require('fs');
 var conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -68,7 +69,16 @@ var values = [[ 'Milk 1l',4],
     if (err) throw err;
   });
 
-});
+
+
+var lines = fs.readFileSync("./files/week1.csv", 'utf8');
+lines = lines.slice(0, -1);
+var salesData = lines.split('\n');
+var header = salesData.indexOf('Day,Date,stock item,No sold,Sales Price');
+if (header > -1) {
+  salesData.splice(header, 1);
+}
+// console.log(salesData);
 
 conn.query("select * from products", function(err, products) {
   if (err) return console.log(err);
@@ -76,13 +86,18 @@ conn.query("select * from products", function(err, products) {
 
   var productNameByProductId = {};
   products.forEach(function(item) {
-    var product_name = item.product_name;
-    var product_id = item.product_id;
-    productNameByProductId[product_name] = product_id;
+product_id = item.product_id;
+    salesData.forEach(function(sales){
+    var product = sales.split(",")[2];
+    if(item.product_name === product){
+      productNameByProductId[product] = product_id;
+    }
+  });
+
     //   categories.forEach(function(catName){
     //
-  });
-  //  console.log(productNameByProductId);
+   });
+   console.log(productNameByProductId);
 
 
   conn.end();
