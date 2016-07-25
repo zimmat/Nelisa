@@ -32,54 +32,58 @@ var productCategoryMap = {
 // CategoryDbIdMap - this is built on the back of a SQL query
 conn.query("select * from categories ", function(err, categories) {
   if (err) return console.log(err);
-    console.log(categories);
-    categoryMap = {};
-categories.forEach(function(catName){
-  var category_name = catName.category_name;
-  var category_id = catName.category_id;
- categoryMap[category_name] = category_id;
-});
-console.log(categoryMap);
+  categoryMap = {};
+  // var values = [];
+  categories.forEach(function(catName) {
+    var category_name = catName.category_name;
+    var category_id = catName.category_id;
+    categoryMap[category_name] = category_id;
+  });
+  var mapProductByCategoryId = {};
+  for (productName in productCategoryMap) {
+      for (categoryName in categoryMap) {
+      if (productCategoryMap[productName] === categoryName) {
+        mapProductByCategoryId[productName] = categoryMap[categoryName];
+        // values.push(productName,categoryMap[categoryName])
+      }
+    }
+  }
 
-  // var productNameByCatId = {};
-  // for (var product in productCategoryMap) {
-  //   var product_name = product;
-  //   for (var id in categories) {
-  //     var category_name = [id];
-  //     //if (!productNameByCatId[product_name].hasOwnProperty(category_name)) {
-  //       productNameByCatId[product_name] = categories[id];
-  //     //}
-  //   }
-  // };
-  // console.log(productNameByCatId);
+  // console.log(mapProductByCategoryId);
+  var sql = "insert into products(product_name,category_id) VALUES ?"
+var values = [[ 'Milk 1l',4],
+  ['Imasi',4],
+  ['Bread',1],
+  ['Chakalaka Can',3],
+  ['Gold Dish Vegetable Curry Can',3],
+  ['Fanta 500ml',8],
+  ['Coke 500ml',8],
+  ['Cream Soda 500ml',8],
+  ['Iwisa Pap 5kg',6],
+  ['Top Class Soy Mince',6],
+  ['Mixed Sweets 5s',2],
+  ['Heart Chocolates', 2] ]
+  conn.query(sql,[values],function(err){
+      //  console.log(values);
+    if (err) throw err;
+  });
+
+});
+
+conn.query("select * from products", function(err, products) {
+  if (err) return console.log(err);
+  // console.log(products);
+
+  var productNameByProductId = {};
+  products.forEach(function(item) {
+    var product_name = item.product_name;
+    var product_id = item.product_id;
+    productNameByProductId[product_name] = product_id;
+    //   categories.forEach(function(catName){
+    //
+  });
+  //  console.log(productNameByProductId);
+
 
   conn.end();
 });
-
-
-
-//   return categoryMap;
-// }
-//
-// {
-//   'Dairy' : 9
-// }
-//
-//
-// // loop through
-//
-//
-//
-//
-//   var sql ="INSERT INTO products(product_name) VALUES ?";
-//
-//   //bulk insert
-//   var values= [];
-//
-//
-//
-//
-// conn.query(sql, [values], function(err) {
-//     if (err) throw err;
-//     conn.end();
-// });
