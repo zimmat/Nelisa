@@ -28,8 +28,6 @@ var productCategoryMap = {
   'Rose (plastic)': 'Other  ',
   'Valentine Cards': 'Other  '
 };
-
-
 // CategoryDbIdMap - this is built on the back of a SQL query
 conn.query("select * from categories ", function(err, categories) {
   if (err) return console.log(err);
@@ -49,8 +47,6 @@ conn.query("select * from categories ", function(err, categories) {
       }
     }
   }
-
-  // console.log(mapProductByCategoryId);
   var sql = "insert into products(product_name,category_id) VALUES ?"
 var values = [[ 'Milk 1l',4],
   ['Imasi',4],
@@ -65,40 +61,50 @@ var values = [[ 'Milk 1l',4],
   ['Mixed Sweets 5s',2],
   ['Heart Chocolates', 2] ]
   conn.query(sql,[values],function(err){
-      //  console.log(values);
     if (err) throw err;
   });
-
-
-
-var lines = fs.readFileSync("./files/week1.csv", 'utf8');
-lines = lines.slice(0, -1);
-var salesData = lines.split('\n');
-var header = salesData.indexOf('Day,Date,stock item,No sold,Sales Price');
-if (header > -1) {
-  salesData.splice(header, 1);
-}
+});
 // console.log(salesData);
-
 conn.query("select * from products", function(err, products) {
   if (err) return console.log(err);
   // console.log(products);
-
   var productNameByProductId = {};
-  products.forEach(function(item) {
-product_id = item.product_id;
-    salesData.forEach(function(sales){
-    var product = sales.split(",")[2];
-    if(item.product_name === product){
-      productNameByProductId[product] = product_id;
-    }
+  products.forEach(function(products) {
+    var product_name = products.product_name;
+    var product_id = products.product_id;
+    productNameByProductId[product_name] = product_id;
   });
-
-    //   categories.forEach(function(catName){
-    //
+ var lines = fs.readFileSync("./files/week1.csv", 'utf8');
+ lines = lines.slice(0, -1);
+ var salesData = lines.split('\n');
+ var header = salesData.indexOf('Day,Date,stock item,No sold,Sales Price');
+ if (header > -1) {
+   salesData.splice(header, 1);
+ }
+  var mapSalesByProductId ={};
+  var salesValues = [];
+ salesData.forEach(function(data){
+  //  var day = data.split(",")[0];
+   var sales_date = new Date(data.split(",")[1]);
+   var product_name = data.split(",")[2];
+   var no_sold = data.split(",")[3];
+   var sales_price = data.split(",")[4];
+   sales_price = sales_price.replace("R",'');
+   sales_price = Number(sales_price);
+   console.log(sales_price);
+   products.forEach(function(product){
+    var product_name = product.product_name;
+     var product_id = product.product_id;
+     if(product_name === product.product_name){
+       mapSalesByProductId[productName] = product_id;
+       salesValues.push([sales_date,product_name,no_sold,sales_price,product_id]);
+     }
    });
-   console.log(productNameByProductId);
-
-
+   });
+          console.log(salesValues);
+        var sqlOne = "insert into sales(sales_date,product_name,no_sold,sales_price,product_id) VALUES ?";
+  conn.query(sqlOne,[salesValues],function(err){
+    if (err) throw err;
+  });
   conn.end();
 });
