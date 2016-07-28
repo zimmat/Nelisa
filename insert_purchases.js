@@ -16,28 +16,30 @@ conn.query("select * from products", function(err, products) {
     var product_id = products.product_id;
     productNameByProductId[product_name] = product_id;
   });
-  var lines = fs.readFileSync("./files/week4.csv", 'utf8');
+  var lines = fs.readFileSync("./files/purchases.csv", 'utf8');
   lines = lines.slice(0, -1);
   var salesData = lines.split('\n');
-  var header = salesData.indexOf('Day,Date,stock item,No sold,Sales Price');
+  var header = salesData.indexOf('Shop;Date;Item;Quantity;Cost;Total Cost');
   if (header > -1) {
     salesData.splice(header, 1);
   }
   var mapSalesByProductId = {};
-  var salesValues = [];
+  var values = [];
   salesData.forEach(function(data) {
-  var myData = data.split(",");
-    var sales_date = new Date(myData[1]);
+  var myData = data.split(";");
+    var shop = myData[0];
+    var date = new Date(myData[1]);
     var product_name = myData[2];
-    var no_sold = Number(myData[3]);
+    var quantity = Number(myData[3]);
     var product_id = productNameByProductId[product_name];
-    var sales_price = Number(myData[4].replace("R", ''));
-salesValues.push([sales_date, product_name, no_sold, sales_price, product_id]);
+      var cost = parseFloat(myData[4].replace("R", ''));
+    var totalCost = parseFloat(myData[5].replace("R", ''));
+values.push([shop,date, product_name, quantity, cost,totalCost, product_id]);
   });
 
-  // console.log(salesValues);
-  var sql = "insert into sales(sales_date,product_name,quantity,sales_price,product_id) VALUES ?";
-  conn.query(sql, [salesValues], function(err) {
+  //  console.log(values);
+  var sql = "insert into purchases(shopName,purchase_date,product_name,quantity,cost,totalCost,product_id) VALUES ?";
+  conn.query(sql, [values], function(err) {
     if (err) throw err;
   });
   conn.end();

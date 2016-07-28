@@ -7,7 +7,6 @@ var conn = mysql.createConnection({
   database: 'nelisa'
 });
 
-
 var productCategoryMap = {
   'Milk 1l': 'Dairy',
   'Imasi': 'Dairy',
@@ -49,7 +48,7 @@ for (category in categoryMap){
      }
    }
   }
-console.log(mapProductByCategoryId);
+console.log(values);
   // console.log("values",mapProductByCategoryId);
   var sql = "insert into products(product_name,category_id) VALUES ?"
   conn.query(sql, [values], function(err) {

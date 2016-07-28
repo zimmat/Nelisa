@@ -3,6 +3,7 @@ use nelisa;
 drop table if exists categories;
 drop table if exists products;
 drop table if exists sales;
+drop table if exists purchases;
 
 create table categories(
     category_id int primary key auto_increment,
@@ -15,10 +16,12 @@ create table products (
     category_id int,foreign key (category_id) references categories(category_id)
 )ENGINE=INNODB;
 create table sales (
-    sales_id int primary key auto_increment,Day char(10) not null, Sales_date date not null,
-        product_name char(100) not null, no_sold int, sales_price int,
+    sales_id int primary key auto_increment, Sales_date date not null,
+        product_name char(100) not null, quantity int, sales_price decimal,
     product_id int,foreign key (product_id) references products(product_id)
 )ENGINE=INNODB;
-
-
-
+create table purchases (
+    purchase_id int primary key auto_increment,shopName char(100) not null, purchase_date date not null,
+        product_name char(100) not null, quantity int, cost decimal,totalCost decimal,
+    product_id int,foreign key (product_id) references products(product_id)
+)ENGINE=INNODB;
