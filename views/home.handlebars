@@ -1,8 +1,13 @@
+<h1>Products</h1>
 
-  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  media="screen,projection"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-  <div class="jumbotron">
-<h1>Hi,Nelisa</h1>
-<p>"Here is your data processed and organised!"</p>
-</div>
+<a href="/products/add">Add</a>
+
+{{#products}}
+  <h2>{{product_name}}</h2>
+  <a href="/products/edit/{{id}}">Edit</a>
+  <a href="/products/delete/{{id}}">Delete</a>
+{{/products}}
+
+{{#no_products}}
+  <p>No products available yet. Add some above.</p>
+{{/no_products}}

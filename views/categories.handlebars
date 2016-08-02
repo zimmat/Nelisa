@@ -1,0 +1,21 @@
+<h1>Categories</h1>
+<div class="container">
+  <h2>Categories</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Category Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {{#categories}}
+        <td>{{category_name}}
+          <a href="/categories/add">Add</a>
+          <a href="/categories/edit/{{category_id}}">Edit</a>
+          <a href="/categories/delete/{{category_id}}">Delete</a>
+        </tr>
+        {{/categories}}
+    </tbody>
+  </table>
+</div>
