@@ -20,7 +20,7 @@ exports.add = function (req, res, next) {
 		if (err) return next(err);
 		var input = req.body;
 		var data = {
-      		description : input.description,
+      		category_name : input.category_name,
   	};
 
 	connection.query('insert into categories set ?', data, function(err, results) {
@@ -44,9 +44,9 @@ exports.get = function(req, res, next){
 exports.update = function(req, res, next){
 
   var data = req.body;
-  var id = req.params.id;
+  var category_id = req.params.category_id;
   req.getConnection(function(err, connection){
-			connection.query('UPDATE categories SET ? WHERE id = ?', [data, id], function(err, rows){
+			connection.query('UPDATE categories SET ? WHERE category_id = ?', [data, category_id], function(err, rows){
     			if (err) next(err);
           		res.redirect('/categories');
     		});
@@ -55,9 +55,9 @@ exports.update = function(req, res, next){
 };
 
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var category_id = req.params.category_id;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM categories WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM categories WHERE category_id = ?', [category_id], function(err,rows){
 			if(err) return next(err);
 			res.redirect('/categories');
 		});
