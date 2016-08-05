@@ -29,7 +29,6 @@ exports.add = function (req, res, next) {
 		var data = {
 			category_id : Number(req.body.category_id),
       		product_name : req.body.product_name,
-			price : Number(req.body.price)
   		};
 
 		connection.query('insert into products set ?', data, function(err, results) {
@@ -39,16 +38,17 @@ exports.add = function (req, res, next) {
 	});
 };
 
+
 exports.get = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.product_id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM categories', [category_id], function(err, categories){
+		connection.query('SELECT * FROM categories', [id], function(err, categories){
 			if(err) return next(err);
-			connection.query('SELECT * FROM products WHERE product_id = ?', [product_id], function(err,products){
+			connection.query('SELECT * FROM products WHERE product_id = ?', [id], function(err,products){
 				if(err) return next(err);
 				var product = products[0];
 				categories = categories.map(function(category){
-					category.selected = category.category_id === product.category_id ? "selected" : "";
+					category.selected = category.id === product.category_id ? "selected" : "";
 					return category;
 				});
 				res.render('edit', {
@@ -78,9 +78,9 @@ exports.update = function(req, res, next){
 };
 
 exports.delete = function(req, res, next){
-	var id = req.params.id;
+	var id = req.params.product_id;
 	req.getConnection(function(err, connection){
-		connection.query('DELETE FROM products WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM products WHERE product_id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			res.redirect('/products');
 		});

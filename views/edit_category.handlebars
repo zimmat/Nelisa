@@ -1,10 +1,10 @@
 <h1>Edit</h1>
 
-<form action="/categories/update/{{data.id}}" method="POST">
+<form action="/categories/update/{{data.category_id}}" method="POST">
 
 	<div class="">
-		<label for="">Description</label>
-		<input type="text" name="description" value="{{data.description}}">
+		<label for="">Category name</label>
+		<input type="text" name="category_name" value="{{data.category_name}}">
 	</div>
 
 	<input type="submit">

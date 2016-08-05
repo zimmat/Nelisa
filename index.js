@@ -3,9 +3,10 @@ var express = require('express'),
     mysql = require('mysql'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    categories = require('./routes/categories');
-     products = require('./routes/products');
-
+    categories = require('./routes/categories'),
+     products = require('./routes/products'),
+     sales = require('./routes/sales'),
+      purchases = require('./routes/purchases');
 var app = express();
 
 var dbOptions = {
@@ -34,25 +35,24 @@ function errorHandler(err, req, res, next) {
 }
 
 //setup the handlers
-
-app.get('/categories', categories.show);
+ app.get('/categories', categories.show);
  app.get('/categories/add', categories.showAdd);
- app.get('/categories/edit/:id', categories.get);
- app.post('/categories/update/:id', categories.update);
+ app.get('/categories/edit/:category_id', categories.get);
+ app.post('/categories/update/:category_id', categories.update);
  app.post('/categories/add', categories.add);
-// //this should be a post but this is only an illustration of CRUD - not on good practices
- app.get('/categories/delete/:id', categories.delete);
+ app.get('/categories/delete/:category_id', categories.delete);
 
-app.get('/', products.show);
-app.get('/products', products.show);
-app.get('/products/edit/:id', products.get);
-app.post('/products/update/:id', products.update);
-app.get('/products/add', products.showAdd);
-app.post('/products/add', products.add);
 
-//this should be a post but this is only an illustration of CRUD - not on good practices
-app.get('/products/delete/:id', products.delete);
 
+ app.get('/', products.show);
+ app.get('/products', products.show);
+ app.get('/products/edit/:product_id', products.get);
+ app.post('/products/update/:product_id', products.update);
+ app.get('/products/add', products.showAdd);
+ app.post('/products/add', products.add);
+
+ //this should be a post but this is only an illustration of CRUD - not on good practices
+ app.get('/products/delete/:product_id', products.delete);
 app.use(errorHandler);
 
 //configure the port number using and environment number
