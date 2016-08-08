@@ -1,4 +1,4 @@
-var express = require('express'),
+  var express = require('express'),
     exphbs  = require('express-handlebars'),
     mysql = require('mysql'),
     myConnection = require('express-myconnection'),
@@ -41,7 +41,7 @@ function errorHandler(err, req, res, next) {
  app.post('/categories/update/:category_id', categories.update);
  app.post('/categories/add', categories.add);
  app.get('/categories/delete/:category_id', categories.delete);
-
+app.get('/products/delete/:product_id', products.delete);
 
 
  app.get('/', products.show);
@@ -51,8 +51,21 @@ function errorHandler(err, req, res, next) {
  app.get('/products/add', products.showAdd);
  app.post('/products/add', products.add);
 
- //this should be a post but this is only an illustration of CRUD - not on good practices
- app.get('/products/delete/:product_id', products.delete);
+
+app.get('/sales', sales.show);
+app.get('/sales/add', sales.showAdd);
+app.get('/sales/edit/:sales_id', sales.get);
+app.post('/sales/update/:sales_id', sales.update);
+app.post('/sales/add', sales.add);
+ app.get('/sales/delete/:sales_id', sales.delete);
+
+
+ app.get('/purchases', purchases.show);
+  app.get('/purchases/add', purchases.showAdd);
+  app.get('/purchases/edit/:purchase_id', purchases.get);
+  app.post('/purchases/update/:purchase_id', purchases.update);
+ app.post('/purchases/add', purchases.add);
+app.get('/purchases/delete/:purchase_id', sales.delete);
 app.use(errorHandler);
 
 //configure the port number using and environment number
