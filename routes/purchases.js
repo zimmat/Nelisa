@@ -21,9 +21,9 @@ exports.showAdd = function(req, res) {
     });
   });
 };
-exports.add = function(req, res, next){
-  req.getConnection(function(err, connection){
-    if(err) return next(err);
+exports.add = function(req, res, next) {
+  req.getConnection(function(err, connection) {
+    if (err) return next(err);
     var data = {
       purchase_id: Number(req.body.category_id),
       shopName: req.body.shopName,
@@ -33,12 +33,12 @@ exports.add = function(req, res, next){
       cost: req.body.cost,
       totalCost: req.body.totalCost,
       product_id: req.body.product_id
-
     };
-connection.query('insert into sales set ?',data, function(err, results){
-  if (err) return next(err);
-  res.redirect('/purchases');
-});
+
+    connection.query('insert into sales set ?', data, function(err, results) {
+      if (err) return next(err);
+      res.redirect('/sales');
+    });
   });
 };
 
