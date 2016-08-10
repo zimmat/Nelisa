@@ -1,0 +1,54 @@
+<div class="jumbotron">
+    <h1>Weekly Sales statistics</h1></div>
+    <h2>{{week}} -statistics</h2>
+    {{#data}}
+    <div class="row-fluid">
+   <div class="col-xs-6">
+      <div class="table-responsive">
+          <h4><strong>Popularity Table</strong></h4>
+         <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>Description</th>
+               <th>Name</th>
+               <th>Quantity</th>
+             </tr>
+           </thead>
+           <tbody>
+             {{#popular}}
+               <tr>
+                 <td>{{description}}</td>
+                 <td>{{name}}</td>
+                 <td>{{quantity}}</td>
+               </tr>
+             {{/popular}}
+           </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="col-xs-6">
+      <div class="table-responsive">
+        <h4><strong>Profitability Table</strong></h4>
+         <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>Description</th>
+               <th>Name</th>
+               <th>Profit</th>
+             </tr>
+           </thead>
+           <tbody>
+             {{#profit}}
+               <tr>
+                 <td>{{description}}</td>
+                 <td>{{name}}</td>
+                 <td>{{profit}}</td>
+               </tr>
+             {{/profit}}
+           </tbody>
+         </table>
+
+      </div>
+   </div>
+</div>
+{{/data}}

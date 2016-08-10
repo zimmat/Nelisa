@@ -1,0 +1,37 @@
+<h1>Add Purchases</h1>
+
+<form action="/purchases/add" method="POST">
+	<div class="">
+		<label for="">Category</label>
+		<select class="" name="category_id">
+			{{#categories}}
+				<option value="{{category_id}}">{{category_name}}</option>
+			{{/categories}}
+		</select>
+	</div>
+	<div>
+		<label for="">Shop Name</label>
+		<input type="text" name="product_name" value="{{shopName}}">
+	</div>
+	<div>
+		<label for="">Date</label>
+		<input type="datetime-local" name="purchase_date" value="{{purchase_date}}">
+	</div>
+	<div>
+		<label for="">Product Name</label>
+		<input type="text" name="product_name" value="{{product_name}}">
+	</div>
+	<div>
+		<label for="">Quantity</label>
+		<input type="number" name="quantity" value="{{quantity}}">
+	</div>
+	<div>
+		<label for="">Price each</label>
+		<input type="number" name="cost" value="{{cost}}">
+	</div>
+	<div>
+		<label for="">Total Cost</label>
+		<input type="number" name="totalCost" value="{{totalCost}}">
+	</div>
+	<input type="submit">
+</form>
