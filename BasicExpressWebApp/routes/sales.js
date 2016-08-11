@@ -1,7 +1,7 @@
 exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    connection.query('SELECT * from sales', [], function(err, results) {
+    connection.query('select sales.sales_id,sales.Sales_date,products.product_name,sales.quantity,sales.sales_price,sales.product_id from products inner join sales on products.product_id = sales.product_id order by sales_date;', [], function(err, results) {
       if (err) return next(err);
       res.render('sales', {
         no_products: results.length === 0,
@@ -13,10 +13,10 @@ exports.show = function(req, res, next) {
 exports.showAdd = function(req, res) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    connection.query('SELECT * from sales', [], function(err, categories) {
+    connection.query('SELECT * from products', [], function(err, products) {
       if (err) return next(err);
       res.render('add_sales', {
-        categories: categories,
+        products: products,
       });
     });
   });
@@ -26,9 +26,7 @@ exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     var data = {
-      sales_id: Number(req.body.category_id),
       Sales_date: req.body.Sales_date,
-      product_name: req.body.product_name,
       quantity: req.body.quantity,
       sales_price: req.body.sales_price,
       product_id: req.body.product_id
@@ -46,18 +44,18 @@ exports.add = function(req, res, next) {
 exports.get = function(req, res, next) {
   var id = req.params.sales_id;
   req.getConnection(function(err, connection) {
-    connection.query('SELECT * FROM categories', [id], function(err, categories) {
+    connection.query('SELECT * FROM products', [id], function(err, categories) {
       if (err) return next(err);
       connection.query('SELECT * FROM sales WHERE sales_id = ?', [id], function(err, products) {
         if (err) return next(err);
-        var product = products[0];
-        categories = categories.map(function(category) {
-          category.selected = category.id === product.category_id ? "selected" : "";
-          return category;
+        var sale = sales[0];
+        products = products.map(function(product) {
+          product.selected = product.id === sale.product_id ? "selected" : "";
+          return product;
         });
         res.render('edit_sales', {
-          categories: categories,
-          data: product
+          products: products,
+          data: sale
         });
       });
     });
@@ -67,9 +65,9 @@ exports.get = function(req, res, next) {
 exports.update = function(req, res, next) {
 
   var data = {
-    sales_id: Number(req.body.category_id),
+    // sales_id: Number(req.body.category_id),
     Sales_date: req.body.Sales_date,
-    product_name: req.body.product_name,
+    // product_name: req.body.product_name,
     quantity: req.body.quantity,
     sales_price: req.body.sales_price,
     product_id: req.body.product_id

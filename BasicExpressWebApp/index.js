@@ -65,7 +65,7 @@ app.post('/sales/add', sales.add);
   app.get('/purchases/edit/:purchase_id', purchases.get);
   app.post('/purchases/update/:purchase_id', purchases.update);
  app.post('/purchases/add', purchases.add);
-app.get('/purchases/delete/:purchase_id', sales.delete);
+// app.get('/purchases/delete/:purchase_id', purchases.delete);
 app.use(errorHandler);
 
 //configure the port number using and environment number
