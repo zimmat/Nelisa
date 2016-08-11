@@ -81,3 +81,13 @@ exports.update = function(req, res, next) {
     });
   });
 };
+
+exports.delete = function(req, res, next) {
+  var id = req.params.purchase_id;
+  req.getConnection(function(err, connection) {
+    connection.query('DELETE FROM purchases WHERE purchase_id = ?', [id], function(err, rows) {
+      if (err) return next(err);
+      res.redirect('/purchases');
+    });
+  });
+};
