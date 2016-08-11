@@ -44,9 +44,9 @@ exports.add = function(req, res, next) {
 exports.get = function(req, res, next) {
   var id = req.params.sales_id;
   req.getConnection(function(err, connection) {
-    connection.query('SELECT * FROM products', [id], function(err, categories) {
+    connection.query('SELECT * FROM products', [id], function(err, products) {
       if (err) return next(err);
-      connection.query('SELECT * FROM sales WHERE sales_id = ?', [id], function(err, products) {
+      connection.query('SELECT * FROM sales WHERE sales_id = ?', [id], function(err, sales) {
         if (err) return next(err);
         var sale = sales[0];
         products = products.map(function(product) {
@@ -65,9 +65,7 @@ exports.get = function(req, res, next) {
 exports.update = function(req, res, next) {
 
   var data = {
-    // sales_id: Number(req.body.category_id),
     Sales_date: req.body.Sales_date,
-    // product_name: req.body.product_name,
     quantity: req.body.quantity,
     sales_price: req.body.sales_price,
     product_id: req.body.product_id

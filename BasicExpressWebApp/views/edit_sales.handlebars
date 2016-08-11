@@ -1,22 +1,18 @@
 <h1>Edit sales</h1>
 
-<form action="/sales/update/{{data.id}}" method="POST">
+<form action="/sales/update/{{data.sales_id}}" method="POST">
 	<div class="">
-		<label for="">Category</label>
-		<select class="" name="category_id">
-			{{#categories}}
-				<option {{selected}} value="{{category_id}}">{{category_name}}</option>
-			{{/categories}}
+		<label for="">Product</label>
+		<select class="" name="product_id">
+			{{#products}}
+				<option {{selected}} value="{{product_id}}">{{product_name}}</option>
+			{{/products}}
 		</select>
 	</div>
 	<div class="">
 		<label for="">Date</label>
 		<input type="datetime-local" name="Sales_date" value="{{Sales_date}}">
 		</div>
-			<div>
-				<label for="">Product Name</label>
-				<input type="text" name="product_name" value="{{product_name}}"></div>
-		    <div>
 		  <label for="">Quantity</label>
 		  <input type="number" name="quantity" value="{{quantity}}">
 			</div>

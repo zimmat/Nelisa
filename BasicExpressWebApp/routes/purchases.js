@@ -43,9 +43,9 @@ exports.add = function(req, res, next) {
 exports.get = function(req, res, next) {
   var id = req.params.purchase_id;
   req.getConnection(function(err, connection) {
-    connection.query('SELECT * FROM products', [id], function(err, categories) {
+    connection.query('SELECT * FROM products', [id], function(err, products) {
       if (err) return next(err);
-      connection.query('SELECT * FROM purchases WHERE purchase_id = ?', [id], function(err, products) {
+      connection.query('SELECT * FROM purchases WHERE purchase_id = ?', [id], function(err, purchases) {
         if (err) return next(err);
         var purchase = purchases[0];
         products = products.map(function(product) {
