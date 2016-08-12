@@ -2,17 +2,17 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var app = express();
 var handlebars = require('handlebars');
-var makeObject = require('./makeObject');
-var getSalesData = require('./getSalesData');
-var getPurchases = require('./getPurchases');
-var profitMap = require('./profitMap');
-var makeCategories = require('./makeCategories');
-var popularProduct = require('./popularProduct');
-var leastPopularProduct = require('./leastPopularProduct');
-var popularCategory = require('./popularCategory');
-var leastPopularCat = require('./leastPopularCat');
-var mostProfitableCat = require('./mostProfitableCat');
-var mostProfitableProduct = require('./mostProfitableProduct');
+var makeObject = require('../makeObject');
+var getSalesData = require('../getSalesData');
+var getPurchases = require('../getPurchases');
+var profitMap = require('../profitMap');
+var makeCategories = require('../makeCategories');
+var popularProduct = require('../popularProduct');
+var leastPopularProduct = require('../leastPopularProduct');
+var popularCategory = require('../popularCategory');
+var leastPopularCat = require('../leastPopularCat');
+var mostProfitableCat = require('../mostProfitableCat');
+var mostProfitableProduct = require('../mostProfitableProduct');
 
 var firstWeek = ['01-Feb', '02-Feb', '03-Feb', '04-Feb', '05-Feb', '06-Feb', '6-Feb', '07-Feb'];
 var secondWeek = ['08-Feb', '09-Feb', '10-Feb', '11-Feb', '12-Feb', '13-Feb', '14-Feb'];
@@ -79,8 +79,8 @@ app.get('/sales/:week', function (req, res) {
     return res.send("invalid week :" + week)
    }
 
-  var weeklyData = './files/' + week +".csv"
-  var data = weeklyStats(weeklyData,'./files/purchases.csv');
+  var weeklyData = '../files/' + week +".csv"
+  var data = weeklyStats(weeklyData,'../files/purchases.csv');
  res.render('weeklyStatistics',{week:week,data:data});
 });
 

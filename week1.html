@@ -3,84 +3,44 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Sales Report</title>
-
-  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  media="screen,projection"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src=" http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <style>
-  .jumbotron{
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<style>
+  .jumbotron {
     text-align: center;
   }
-  </style>
-</head>
+</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Nelisa's Spaza Shop</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/sales/week1">Weekly Sales Statistics <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/sales/week1">week1</a></li>
+            <li><a href="/sales/week2">week2</a></li>
+            <li><a href="/sales/week3">week3</a></li>
+              <li><a href="/sales/week4">week4</a></li>
+          </ul>
+        </li>
+        <li><a href="categories">Categories</a></li>
+        <li><a href="products">Products</a></li>
+        <li><a href="sales">Sales</a></li>
+          <li><a href="purchases">Purchases</a></li>
+      </ul>
 
-<body>
-  <div class="jumbotron"><h1>Weekly Sales statistics</h1></div>
-  <div>
+    </div>
+  </nav>
 
-    <div class="container">
-  <h4><strong>Popularity Table</strong></h4>
-    <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Name</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Most popular product </td>
-        <td>Coke 500ml</td>
-        <td>54</td>
-      </tr><tr>
-        <td>Least popular product </td>
-        <td>Shampoo 1 litre</td>
-        <td>3</td>
-      </tr><tr>
-        <td>Most popular category </td>
-        <td>Soft Drinks</td>
-        <td>109</td>
-      </tr><tr>
-        <td>Least popular category </td>
-        <td>toiletries</td>
-        <td>15</td>
-      </tr>
-    </tbody>
-  </table>
 
-  </div>
 
-  <div class="container">
-<h4><strong>Profit Table</strong></h4>
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Name</th>
-      <th>Profit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Most profitable product</td>
-      <td>Iwisa Pap 5kg</td>
-      <td>R410.00</td>
-    </tr><tr>
-      <td>Most profitable category</td>
-      <td>grocerries</td>
-      <td>R594.00</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-  <script src="server.js"></script>
-  <!-- <script type="text/javascript" src="js/bootstrap.m/in.js"></script> -->
 </body>
 
 </html>

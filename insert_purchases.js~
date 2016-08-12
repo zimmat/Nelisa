@@ -34,11 +34,11 @@ conn.query("select * from products", function(err, products) {
     var product_id = productNameByProductId[product_name];
       var cost = parseFloat(myData[4].replace("R", ''));
     var totalCost = parseFloat(myData[5].replace("R", ''));
-values.push([shop,date,quantity, cost,product_id]);
+values.push([shop,date, product_name, quantity, cost,product_id]);
   });
 
   //  console.log(values);
-  var sql = "insert into purchases(shopName,purchase_date,quantity,cost,product_id) VALUES ?";
+  var sql = "insert into purchases(shopName,purchase_date,product_name,quantity,cost,product_id) VALUES ?";
   conn.query(sql, [values], function(err) {
     if (err) throw err;
   });

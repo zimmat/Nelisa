@@ -51,7 +51,7 @@ var profitableProduct = mostProfitableProduct(wkOneProfit);
 var profitableCategory = mostProfitableCat(wkOnePurchaseCat);
 //console.log(profitableCategory);
 
-var source = fs.readFileSync('./views/layouts/display.handlebars', "utf8");
+var source = fs.readFileSync('/home/coder/projects/Nelisa/BasicExpressWebApp/views/layouts/display.handlebars', "utf8");
 var template = handlebars.compile(source);
 var data = {
   popular: [popularProduct,leastPopularProduct,mostPopularCat,leastPopularCat],
@@ -59,4 +59,4 @@ var data = {
 };
 // console.log(mostPopularCat);
 var result = template(data);
-fs.writeFileSync('display.html', result);
+fs.writeFileSync('week1.html', result);
