@@ -16,7 +16,7 @@ conn.query("select * from products", function(err, products) {
     var product_id = products.product_id;
     productNameByProductId[product_name] = product_id;
   });
-  var lines = fs.readFileSync("./files/week4.csv", 'utf8');
+  var lines = fs.readFileSync("./files/sales.csv", 'utf8');
   lines = lines.slice(0, -1);
   var salesData = lines.split('\n');
   var header = salesData.indexOf('Day,Date,stock item,No sold,Sales Price');
