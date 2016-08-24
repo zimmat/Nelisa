@@ -28,7 +28,7 @@ conn.query("select * from products", function(err, products) {
   salesData.forEach(function(data) {
   var myData = data.split(";");
     var shop = myData[0];
-    var date = new Date(myData[1]);
+    var date = new Date(myData[1] + '2016');
     var product_name = myData[2];
     var quantity = Number(myData[3]);
     var product_id = productNameByProductId[product_name];

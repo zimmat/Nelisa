@@ -1,7 +1,7 @@
 exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    connection.query('select purchases.purchase_id ,purchases.shopName,purchases.purchase_date,products.product_name,purchases.quantity,purchases.cost,purchases.product_id from products inner join purchases on products.product_id = purchases.product_id order by purchase_date', [], function(err, results) {
+    connection.query("select DATE_FORMAT(purchases.purchase_date,'%d %b %y') as purchase_date, purchases.purchase_id ,purchases.shopName,products.product_name,purchases.quantity,purchases.cost,purchases.product_id from products inner join purchases on products.product_id = purchases.product_id order by purchase_date", [], function(err, results) {
       if (err) return next(err);
       res.render('purchases', {
         no_products: results.length === 0,
