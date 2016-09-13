@@ -82,7 +82,7 @@ database : 'nelisa'
 app.engine('handlebars', exphbs({defaultLayout: 'display'}));
 app.set('view engine', 'handlebars');
 
-// app.use(express.static( + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 //setup middleware
 app.use(myConnection(mysql, dbOptions, 'single'));
