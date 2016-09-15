@@ -18,7 +18,7 @@
       leastPopularCat = require('../leastPopularCat');
       mostProfitableCat = require('../mostProfitableCat');
       mostProfitableProduct = require('../mostProfitableProduct');
-
+      session = require('express-session');
       var firstWeek = ['01-Feb', '02-Feb', '03-Feb', '04-Feb', '05-Feb', '06-Feb', '6-Feb', '07-Feb'];
       var secondWeek = ['08-Feb', '09-Feb', '10-Feb', '11-Feb', '12-Feb', '13-Feb', '14-Feb'];
       var thirdWeek = ['15-Feb', '16-Feb', '17-Feb', '18-Feb', '19-Feb', '20-Feb', '21-Feb'];
@@ -117,7 +117,9 @@ app.get('/sales/:week', function (req, res) {
 app.get('/products/delete/:product_id', products.delete);
 
 
- app.get('/', products.show);
+ app.get('/', function(req,res){
+   res.render('home');
+ });
  app.get('/products', products.show);
  app.get('/products/edit/:product_id', products.get);
  app.post('/products/update/:product_id', products.update);
@@ -139,10 +141,33 @@ app.post('/sales/add', sales.add);
   app.post('/purchases/update/:purchase_id', purchases.update);
  app.post('/purchases/add', purchases.add);
 app.get('/purchases/delete/:purchase_id', purchases.delete);
+
+
+app.get('/signup',function(req,res){
+  res.render('signup');
+});
+
 app.use(errorHandler);
 
+
+
+//set up HttpSession middleware
+app.use(session({
+    secret: 'this is my phrase',
+    cookie: { maxAge: 60000 },
+}));
+
+//in a route
+app.get("/", function(req, res){
+    // req.session will be defined now
+    if (!req.session.user){
+        //set a session value from a form variable
+        req.session.user = req.body.username;
+    }
+});
 //configure the port number using and environment number
 var portNumber = process.env.CRUD_PORT_NR || 3000;
+
 
 //start everything up
 app.listen(portNumber, function () {
