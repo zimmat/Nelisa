@@ -1,7 +1,15 @@
-<div class="login">
-    <input type="text" placeholder="Username" id="username">
-  <input type="password" placeholder="password" id="password">
-  <a href="#" class="forgot">forgot password?</a>
-  <input type="submit" value="Sign In">
-</div>
-<div class="shadow"></div>
+<h1>Welcome!</h1>
+
+{{#if user}}
+    Hello, {{user.name}}
+{{/if}}
+
+<h2>You should only see this page if you are logged in!</h2>
+{{# if user.is_admin}}
+<h3>And this message if you are an admin user</h3>
+
+Welcome admin user!
+{{/if}}
+
+<h3>You should be able to logout of the app</h3>
+<a href="/logout">Logout</a>

@@ -78,9 +78,22 @@ password : 'coder123',
 database : 'nelisa'
 };
 
+var rolesMap = {
+  "Nelisa" : "admin",
+  "Zee" : "view"
+};
+
 //setup template handlebars as the template engine
 app.engine('handlebars', exphbs({defaultLayout: 'display'}));
 app.set('view engine', 'handlebars');
+app.use(session({
+  secret: 'keyboard cat',
+  cookie: {
+    maxAge: 60000
+  }
+}));
+
+
 
 app.use(express.static(__dirname + '/public'));
 
@@ -90,6 +103,39 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+// app.post('/', function(req, res) {
+//
+// });
+app.get("/", function(req, res) {
+  res.redirect("/home");
+});
+var checkUser = function(req, res, next) {
+    if (req.session.user){
+      return next();
+    }
+  res.redirect("/login");
+};
+app.post("/login", function(req, res) {
+  req.session.user = {
+    name : req.body.username,
+    is_admin : rolesMap[req.body.username] === "admin"
+  };
+  res.redirect("/home");
+});
+app.get("/home", checkUser, function(req, res) {
+res.render("home",{user : req.session.user});
+});
+
+
+app.get("/logout", function(req, res) {
+  delete session.user;
+  res.redirect("/login");
+})
+
+app.get("/login", function(req, res) {
+  res.render("login", {});
+});
 
 function errorHandler(err, req, res, next) {
   res.status(500);
@@ -118,7 +164,7 @@ app.get('/products/delete/:product_id', products.delete);
 
 
  app.get('/', function(req,res){
-   res.render('home');
+   res.render('signin');
  });
  app.get('/products', products.show);
  app.get('/products/edit/:product_id', products.get);
@@ -143,32 +189,10 @@ app.post('/sales/add', sales.add);
 app.get('/purchases/delete/:purchase_id', purchases.delete);
 
 
-app.get('/signup',function(req,res){
-  res.render('signup');
-});
-
 app.use(errorHandler);
 
-
-
-//set up HttpSession middleware
-app.use(session({
-    secret: 'this is my phrase',
-    cookie: { maxAge: 60000 },
-}));
-
-//in a route
-app.get("/", function(req, res){
-    // req.session will be defined now
-    if (!req.session.user){
-        //set a session value from a form variable
-        req.session.user = req.body.username;
-    }
-});
 //configure the port number using and environment number
 var portNumber = process.env.CRUD_PORT_NR || 3000;
-
-
 //start everything up
 app.listen(portNumber, function () {
     console.log('Create, Read, Update, and Delete (CRUD) example server listening on:', portNumber);
