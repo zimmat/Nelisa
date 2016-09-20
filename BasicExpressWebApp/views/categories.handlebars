@@ -4,7 +4,7 @@
       <tr>
         <th>Category ID</th>
         <th>Category Name</th>
-          <a href="/categories/add">Add</a>
+    {{#if user.is_admin}}      <a href="/categories/add">Add</a>{{/if}}
       </tr>
     </thead>
     <tbody>
@@ -12,9 +12,9 @@
         {{#categories}}
         <td>{{category_id}}</td>
         <td>{{category_name}}</td>
-          <td><a href="/categories/edit/{{category_id}}">Edit</a>
+        {{#if user.is_admin}}  <td><a href="/categories/edit/{{category_id}}">Edit</a>
           <a href="/categories/delete/{{category_id}}">Delete</a>
-        </td>
+        </td>{{/if}}
         </tr>
         {{/categories}}
     </tbody>
