@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Products Table</h2>
-  <a href="/products/add">Add a new product</a>
+{{#if user.is_admin}}  <a href="/products/add">Add a new product</a>{{/if}}
   <table class="table">
     <thead>
       <tr>
@@ -13,8 +13,8 @@
         {{#products}}
         <td>{{product_id}}
         <td>{{product_name}}</td>
-          <td><a href="/products/edit/{{product_id}}">Edit</a>
-          <a href="/products/delete/{{product_id}}">Delete</a></td>
+        {{#if user.is_admin}}  <td><a href="/products/edit/{{product_id}}">Edit</a>
+          <a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
         </tr>
         {{/products}}
     </tbody>

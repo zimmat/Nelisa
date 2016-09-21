@@ -2,14 +2,12 @@
 
 {{#if user}}
     Hello, {{user.name}}
+<h2>Welcome to Nelisa spaza shop</h2>
 {{/if}}
-
-<h2>You should only see this page if you are logged in!</h2>
 {{# if user.is_admin}}
-<h3>And this message if you are an admin user</h3>
+<!-- <h3>And this message if you are an admin user</h3> -->
 
 Welcome admin user!
+<h3>You can add,delete and edit the information as you like</h3>
 {{/if}}
-
-<h3>You should be able to logout of the app</h3>
 <a href="/logout">Logout</a>

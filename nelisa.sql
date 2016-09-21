@@ -25,3 +25,9 @@ create table purchases (
         product_name char(100) not null, quantity int, cost decimal(10,2),totalCost decimal(10,2),
     product_id int,foreign key (product_id) references products(product_id)
 )ENGINE=INNODB;
+
+create table users(
+    user_id int primary key auto_increment,
+    user_name char(100) not null,password char(100) not null
+)ENGINE=INNODB;
+
