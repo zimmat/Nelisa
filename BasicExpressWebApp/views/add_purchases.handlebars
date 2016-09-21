@@ -1,6 +1,7 @@
 <h1>Add Purchases</h1>
 
 <form action="/purchases/add" method="POST">
+	{{#if is_admin}}
 	<div class="">
 		<label for="">Product</label>
 		<select class="" name="product_id">
@@ -9,6 +10,7 @@
 			{{/products}}
 		</select>
 	</div>
+	{{/if}}
 	<div>
 		<label for="">Shop Name</label>
 		<input type="text" name="shopName" value="{{shopName}}">

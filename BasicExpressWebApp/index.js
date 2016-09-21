@@ -93,8 +93,6 @@ app.use(session({
   }
 }));
 
-
-
 app.use(express.static(__dirname + '/public'));
 
 //setup middleware
@@ -162,10 +160,6 @@ app.get('/sales/:week', function (req, res) {
  app.get('/categories/delete/:category_id', categories.delete);
 app.get('/products/delete/:product_id', products.delete);
 
-
- app.get('/', function(req,res){
-   res.render('signin');
- });
  app.get('/products', products.show);
  app.get('/products/edit/:product_id', products.get);
  app.post('/products/update/:product_id', products.update);
