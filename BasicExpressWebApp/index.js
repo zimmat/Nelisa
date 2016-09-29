@@ -3,70 +3,13 @@ var express = require('express'),
    mysql = require('mysql'),
    myConnection = require('express-myconnection'),
    bodyParser = require('body-parser'),
+   session = require('express-session'),
+   weeklyStats = require('./routes/weeklyStats')
    categories = require('./routes/categories'),
-    products = require('./routes/products'),
-    sales = require('./routes/sales'),
-     purchases = require('./routes/purchases');
-     makeObject = require('../makeObject');
-      getSalesData = require('../getSalesData');
-     getPurchases = require('../getPurchases');
-     profitMap = require('../profitMap');
-     makeCategories = require('../makeCategories');
-     popularProduct = require('../popularProduct');
-     leastPopularProduct = require('../leastPopularProduct');
-     popularCategory = require('../popularCategory');
-     leastPopularCat = require('../leastPopularCat');
-     mostProfitableCat = require('../mostProfitableCat');
-     mostProfitableProduct = require('../mostProfitableProduct');
-     session = require('express-session');
-     var firstWeek = ['01-Feb', '02-Feb', '03-Feb', '04-Feb', '05-Feb', '06-Feb', '6-Feb', '07-Feb'];
-     var secondWeek = ['08-Feb', '09-Feb', '10-Feb', '11-Feb', '12-Feb', '13-Feb', '14-Feb'];
-     var thirdWeek = ['15-Feb', '16-Feb', '17-Feb', '18-Feb', '19-Feb', '20-Feb', '21-Feb'];
-     var fourthWeek = ['22-Feb', '23-Feb', '24-Feb', '25-Feb', '26-Feb', '28-Feb', '1-Mar'];
+   products = require('./routes/products'),
+   sales = require('./routes/sales'),
+   purchases = require('./routes/purchases');
 
-     var weekDate = []
-
-     var cats = {
-       'Milk 1l': 'Dairy',
-       'Imasi': 'Dairy',
-       'Bread': 'Bakery',
-       'Chakalaka Can': 'Canned Food',
-       'Gold Dish Vegetable Curry Can': 'Canned Food',
-       'Fanta 500ml': 'Soft Drinks',
-       'Coke 500ml': 'Soft Drinks',
-       'Cream Soda 500ml': 'Soft Drinks',
-       'Iwisa Pap 5kg': 'Grocerries',
-       'Top Class Soy Mince': 'Grocerries',
-       'Shampoo 1 litre': 'Toiletries',
-       'Soap Bar': 'Toiletries',
-       'Bananas - loose': 'Fruit',
-       'Apples - loose': 'Fruit',
-       'Mixed Sweets 5s': 'candy',
-       'Heart Chocolates': 'Candy',
-       'Rose (plastic)': 'other',
-       'Valentine Cards': 'other'};
-
-     var weeklyStats = function(path,purchases){
-       var weekQuantity = makeObject(path);
-       var weekSales = getSalesData(path);
-       var weekPurchases = getPurchases(purchases, firstWeek);
-       var weekQuantityCategories = makeCategories(weekQuantity,cats);
-       var weekSalesCat = makeCategories(weekSales,cats);
-       var weekPurchaseCat = makeCategories(weekPurchases,cats);
-       var weekProfit = profitMap(weekSales,weekPurchases);
-       var weekProfitCategories = profitMap(weekSalesCat,weekPurchaseCat);
-       var MostpopularProduct = popularProduct(weekQuantity);
-       var UnpopularProduct = leastPopularProduct(weekQuantity);
-       var mostPopularCat = popularCategory(weekQuantityCategories);
-       var unpopularCat = leastPopularCat(weekQuantityCategories);
-       var profitableProduct = mostProfitableProduct(weekProfit);
-       var profitableCategory = mostProfitableCat(weekProfitCategories);
-       var data_for_template = {
-         popular: [MostpopularProduct,UnpopularProduct,mostPopularCat,unpopularCat],
-          profit:[profitableProduct,profitableCategory]
-       };
-       return data_for_template;
-     }
 
 
 var app = express();
@@ -119,17 +62,16 @@ var checkUser = function(req, res, next) {
 app.post("/login", function(req, res) {
  req.session.user = {
    name : req.body.username,
+   password: req.body.password,
    is_admin : rolesMap[req.body.username] === "admin"
  };
+ console.log(req.session.user);
  res.redirect("/home");
 });
 app.get("/home", checkUser, function(req, res) {
 res.render("home",{user : req.session.user});
 });
 
-app.get("/products",checkUser,function(req,res){
-  res.render("products.show",{user : req.session.user});
-});
 app.get("/logout", function(req, res) {
  delete session.user;
  res.redirect("/login");
@@ -144,18 +86,7 @@ function errorHandler(err, req, res, next) {
  res.render('error', { error: err });
 }
 
-//setup the handlers
-app.get('/sales/:week', function (req, res) {
- var week = req.params.week;
-  if(Number(week.replace("week", "")) > 52){
-   return res.send("invalid week :" + week)
-  }
-
- var weeklyData = '../files/' + week +".csv"
- var data = weeklyStats(weeklyData,'../files/purchases.csv');
-res.render('weeklyStatistics',{week:week,data:data});
-});
-
+app.get('/sales/:week', weeklyStats.show);
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
 app.get('/categories/edit/:category_id', categories.get);
