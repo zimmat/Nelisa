@@ -1,0 +1,67 @@
+exports.show = function (req, res, next) {
+	req.getConnection(function(err, connection){
+		if (err) return next(err);
+		connection.query('SELECT * from users', [], function(err, results) {
+        	if (err) return next(err);
+    		res.render( 'users', {
+					no_users : results.length === 0,
+					users : results,
+    		});
+      	});
+	});
+};
+exports.showAdd = function(req, res){
+	res.render('add_user');
+}
+
+exports.add = function(req, res, next) {
+  req.getConnection(function(err, connection) {
+    if (err) return next(err);
+    var data = {
+      user_name: req.body.user_name,
+      password: req.body.password,
+      Role: req.body.Role
+
+    };
+
+    connection.query('insert into users set ?', data, function(err, results) {
+      if (err) return next(err);
+      res.redirect('/users');
+    });
+  });
+};
+
+exports.get = function(req, res, next){
+	var id = req.params.user_id;
+	console.log(id);
+	req.getConnection(function(err, connection){
+		connection.query('SELECT * FROM users WHERE user_id = ?', [id], function(err,rows){
+			if(err) return next(err);
+			console.log(rows);
+			res.render('edit_users',{page_title:"Edit Customers - Node.js", data : rows[0]});
+		});
+	});
+};
+
+exports.update = function(req, res, next){
+  var data = req.body;
+  var id = req.params.user_id;
+	//console.log(id);
+  req.getConnection(function(err, connection){
+			connection.query('UPDATE users SET ? WHERE user_id = ?', [data, id], function(err, rows){
+    			if (err) next(err);
+          		res.redirect('/users');
+    		});
+
+    });
+};
+
+exports.delete = function(req, res, next){
+	var id = req.params.user_id;
+	req.getConnection(function(err, connection){
+		connection.query('DELETE FROM users WHERE user_id = ?', [id], function(err,rows){
+			if(err) return next(err);
+			res.redirect('/users');
+		});
+	});
+};

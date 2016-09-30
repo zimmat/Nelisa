@@ -9,6 +9,7 @@ var express = require('express'),
    products = require('./routes/products'),
    sales = require('./routes/sales'),
    purchases = require('./routes/purchases');
+   users = require('./routes/users');
 
 
 
@@ -121,7 +122,12 @@ app.get('/purchases', purchases.show);
 app.post('/purchases/add', purchases.add);
 app.get('/purchases/delete/:purchase_id', purchases.delete);
 
-
+app.get('/users',users.show);
+ app.get('/users/add', users.showAdd);
+ app.post('/users/add', users.add);
+  app.get('/users/edit/:user_id', users.get);
+  app.post('/users/update/:users_id', users.update);
+  app.get('/users/delete/:user_id', users.delete);
 app.use(errorHandler);
 
 //configure the port number using and environment number
