@@ -31,7 +31,7 @@
         <li><a href="products">Products</a></li>
         <li><a href="sales">Sales</a></li>
         <li><a href="purchases">Purchases</a></li>
-        <li><a href="users">Manage users</a></li>
+        {{#if user.is_admin}}<li><a href="users">Manage users</a></li>{{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->

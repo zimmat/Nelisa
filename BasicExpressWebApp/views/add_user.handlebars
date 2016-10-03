@@ -1,7 +1,33 @@
-<h1>Add User</h1>
+<!-- <h1>Add User</h1>
 
 <form action="/users/add" method="POST">
-  <div>
+  <div class="register">
+    <div>
+      <input type="text" required placeholder="Username" id={{user_name}}>
+    </div>
+    <div>
+      <input type="password" required placeholder="Password" id="{{password}}">
+    </div>
+    <div>
+      <input type="password" required placeholder="Confirm password" id="confirm password">
+    </div>
+    <div class="group" style="margin-top:60px">
+      <input type="button" class="button-raised" value="REGISTER">
+    </div>
+  </div> -->
+
+  <h1>login</h1>
+  <div class="login">
+
+  <form class="" action="/login" method="post">
+      <input type="text" name="username" value="" placeholder="username">
+    <input type="password" placeholder="password" id="password">
+    <a href="/signup" class="forgot">forgot password?</a>
+    <input type="submit" name="name" value="login">
+  </div>
+  </form>
+
+  <!-- <div>
 	<label for="">Username</label>
 	<input type="text" name="user_name" value="{{user_name}}">
 </div>
@@ -13,5 +39,5 @@
   <label for="">Role</label>
   <input type="text" name="Role" value="{{Role}}">
 </div>
-	<input type="submit">
+	<input type="submit"> -->
 </form>
