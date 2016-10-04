@@ -1,7 +1,3 @@
-var express = require('express');
-var app = express();
-
-
 app.get('/login',function(req, res, next)(
   return res.render("/login");
 ));

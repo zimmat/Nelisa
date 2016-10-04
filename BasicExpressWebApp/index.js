@@ -76,7 +76,7 @@ app.post("/login", function(req, res) {
       name: req.body.username,
       password: req.body.password
     }
-    console.log(user);
+    console.log(user.password);
     user1.push(user);
     req.getConnection(function(err, connection) {
       connection.query('SELECT * FROM users', [], function(err, database) {
