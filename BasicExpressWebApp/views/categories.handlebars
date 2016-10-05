@@ -4,8 +4,12 @@
       <tr>
         <th>Category ID</th>
         <th>Category Name</th>
+<<<<<<< HEAD
       {{#if user.is_admin}}  <th>Admin Options</th>{{/if}}
     <a href="/categories/add">Add</a>
+=======
+    {{#if user.is_admin}}      <a href="/categories/add">Add</a>{{/if}}
+>>>>>>> f0c0a531658945486fddebb0b3db704eb5d4162c
       </tr>
     </thead>
     <tbody>
@@ -13,9 +17,13 @@
         {{#categories}}
         <td>{{category_id}}</td>
         <td>{{category_name}}</td>
+<<<<<<< HEAD
            <td><a href="/categories/edit/{{category_id}}">Edit</a>
+=======
+        {{#if user.is_admin}}  <td><a href="/categories/edit/{{category_id}}">Edit</a>
+>>>>>>> f0c0a531658945486fddebb0b3db704eb5d4162c
           <a href="/categories/delete/{{category_id}}">Delete</a>
-        </td>
+        </td>{{/if}}
         </tr>
         {{/categories}}
     </tbody>
