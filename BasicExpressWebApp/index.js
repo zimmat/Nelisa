@@ -76,7 +76,7 @@ app.post("/login", function(req, res) {
       name: req.body.username,
       password: req.body.password
     }
-    console.log(user.password);
+    // console.log(user.password);
     user1.push(user);
     req.getConnection(function(err, connection) {
       connection.query('SELECT * FROM users', [], function(err, database) {
@@ -89,7 +89,7 @@ app.post("/login", function(req, res) {
                 is_admin: rolesMap[req.body.username] === "admin",
                 user: rolesMap[req.body.username] === "viewer"
               };
-              console.log("req.session.user");
+              // console.log("req.session.user");
               res.redirect("/home");
             }
             if (dbUser.username === input.name && dbUser.password !== input.password) {
@@ -108,9 +108,10 @@ else {
 
 });
 app.get("/home", checkUser, function(req, res) {
-  res.render("home", {
-    user: req.session.user
-  });
+res.render("home", {
+  user: req.session.user,
+  is_admin: req.session.user.is_admin
+})
 });
 
 app.get("/logout", function(req, res) {
@@ -171,8 +172,6 @@ app.get('/users/edit/:user_id', users.get);
 app.post('/users/update/:users_id', users.update);
 app.get('/users/delete/:user_id', users.delete);
 
-// app.get('/signup/add', signup.showRegister);
-// app.post('/users/add', users.register);
 app.use(errorHandler);
 
 //configure the port number using and environment number
