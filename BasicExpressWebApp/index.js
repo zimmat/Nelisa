@@ -12,6 +12,7 @@ categories = require('./routes/categories'),
   users = require('./routes/users'),
   flash = require('express-flash'),
   signup = require('./routes/signup');
+  middleware = require('./middlewares/server');
 
 
 var app = express();
@@ -25,7 +26,7 @@ var dbOptions = {
 
 var rolesMap = {
   "Nelisa": "admin",
-  "Zee": "viewer"
+  "Zee": "user"
 };
 
 //setup template handlebars as the template engine
@@ -57,9 +58,15 @@ app.use(bodyParser.urlencoded({
   // parse application/json
 app.use(bodyParser.json())
 
-// app.post('/', function(req, res) {
-//
-// });
+app.get("/signup", middleware.loggedOut, function(req, res, next){
+res.render("signup");
+});
+
+app.get("/login",middleware.loggedOut, function(req, res) {
+res.render("login", {
+  showNavBar: false
+});
+});
 app.get("/", function(req, res) {
   res.redirect("/home");
 });
@@ -74,7 +81,7 @@ app.post("/login", function(req, res) {
   if (req.body.username) {
     var user = {
       name: req.body.username,
-      password: req.body.password
+      password: req.body.password,
     }
     // console.log(user.password);
     user1.push(user);
@@ -87,9 +94,9 @@ app.post("/login", function(req, res) {
               req.session.user = {
                 name: req.body.username,
                 is_admin: rolesMap[req.body.username] === "admin",
-                user: rolesMap[req.body.username] === "viewer"
+                user: rolesMap[req.body.username] === "user"
               };
-              // console.log("req.session.user");
+               console.log(req.session.user);
               res.redirect("/home");
             }
             if (dbUser.username === input.name && dbUser.password !== input.password) {
@@ -115,13 +122,10 @@ res.render("home", {
 });
 
 app.get("/logout", function(req, res) {
-  delete session.user;
+  delete req.session.user;
   res.redirect("/login");
 })
 
-app.get("/login", function(req, res) {
-  res.render("login", {});
-});
 
 function errorHandler(err, req, res, next) {
   res.status(500);
@@ -130,47 +134,45 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-app.get('/sales/:week', weeklyStats.show);
-app.get('/categories', categories.show);
-app.get('/categories/add', categories.showAdd);
-app.get('/categories/edit/:category_id', categories.get);
-app.post('/categories/update/:category_id', categories.update);
-app.post('/categories/add', categories.add);
-app.get('/categories/delete/:category_id', categories.delete);
-app.get('/products/delete/:product_id', products.delete);
+app.get('/sales/:week', middleware.requiresLogin,weeklyStats.show);
 
 
-app.get('/', function(req, res) {
-  res.render('signin');
-});
-app.get('/products', products.show);
-app.get('/products/edit/:product_id', products.get);
-app.post('/products/update/:product_id', products.update);
-app.get('/products/add', products.showAdd);
-app.post('/products/add', products.add);
+app.get('/categories', middleware.requiresLogin,categories.show);
+app.get('/categories/add',middleware.requiresLogin,categories.showAdd);
+app.get('/categories/edit/:category_id',middleware.requiresLogin, categories.get);
+app.post('/categories/update/:category_id',middleware.requiresLogin, categories.update);
+app.post('/categories/add',middleware.requiresLogin, categories.add);
+app.get('/categories/delete/:category_id',middleware.requiresLogin, categories.delete);
 
 
-app.get('/sales', sales.show);
-app.get('/sales/add', sales.showAdd);
-app.get('/sales/edit/:sales_id', sales.get);
-app.post('/sales/update/:sales_id', sales.update);
-app.post('/sales/add', sales.add);
-app.get('/sales/delete/:sales_id', sales.delete);
+app.get('/products',middleware.requiresLogin, products.show);
+app.get('/products/add', middleware.requiresLogin,products.showAdd);
+app.post('/products/add',middleware.requiresLogin,products.add);
+app.get('/products/edit/:product_id',middleware.requiresLogin,products.get);
+app.post('/products/update/:product_id',middleware.requiresLogin,products.update);
+app.get('/products/delete/:product_id',middleware.requiresLogin, products.delete);
+
+app.get('/sales',middleware.requiresLogin,sales.show);
+app.get('/sales/add',middleware.requiresLogin,sales.showAdd);
+app.get('/sales/edit/:sales_id',middleware.requiresLogin,sales.get);
+app.post('/sales/update/:sales_id',middleware.requiresLogin,sales.update);
+app.post('/sales/add', middleware.requiresLogin,sales.add);
+app.get('/sales/delete/:sales_id',middleware.requiresLogin,sales.delete);
 
 
-app.get('/purchases', purchases.show);
-app.get('/purchases/add', purchases.showAdd);
-app.get('/purchases/edit/:purchase_id', purchases.get);
-app.post('/purchases/update/:purchase_id', purchases.update);
-app.post('/purchases/add', purchases.add);
-app.get('/purchases/delete/:purchase_id', purchases.delete);
+app.get('/purchases',middleware.requiresLogin, purchases.show);
+app.get('/purchases/add',middleware.requiresLogin, purchases.showAdd);
+app.get('/purchases/edit/:purchase_id',middleware.requiresLogin, purchases.get);
+app.post('/purchases/update/:purchase_id',middleware.requiresLogin, purchases.update);
+app.post('/purchases/add',middleware.requiresLogin, purchases.add);
+app.get('/purchases/delete/:purchase_id',middleware.requiresLogin, purchases.delete);
 
-app.get('/users', users.show);
-app.get('/users/add', users.showAdd);
-app.post('/users/add', users.add);
-app.get('/users/edit/:user_id', users.get);
-app.post('/users/update/:users_id', users.update);
-app.get('/users/delete/:user_id', users.delete);
+app.get('/users',middleware.requiresLogin, users.show);
+app.get('/users/add',middleware.requiresLogin, users.showAdd);
+app.post('/users/add',middleware.requiresLogin, users.add);
+app.get('/users/edit/:user_id',middleware.requiresLogin, users.get);
+app.post('/users/update/:users_id',middleware.requiresLogin,middleware.requiresLogin, users.update);
+app.get('/users/delete/:user_id',middleware.requiresLogin, users.delete);
 
 app.use(errorHandler);
 

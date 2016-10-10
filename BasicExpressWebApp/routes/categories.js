@@ -6,13 +6,17 @@ exports.show = function (req, res, next) {
 		res.render( 'categories', {
 				no_products : results.length === 0,
 				categories : results,
+				user : req.session.user,
+				is_admin : req.session.user.is_admin
 		});
       });
 	});
 };
 
 exports.showAdd = function(req, res){
-	res.render('add_category');
+	res.render('add_category',{	user : req.session.user,
+		is_admin : req.session.user.is_admin});
+
 }
 
 exports.add = function (req, res, next) {
@@ -38,7 +42,8 @@ exports.get = function(req, res, next){
 		connection.query('SELECT * FROM categories WHERE category_id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			console.log(rows);
-			res.render('edit_category',{page_title:"Edit Customers - Node.js", data : rows[0]});
+			res.render('edit_category',{page_title:"Edit Customers - Node.js", data : rows[0],	user : req.session.user,
+				is_admin : req.session.user.is_admin});
 		});
 	});
 };

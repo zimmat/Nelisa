@@ -6,6 +6,8 @@ exports.show = function(req, res, next) {
       res.render('purchases', {
         no_products: results.length === 0,
         purchases: results,
+        user : req.session.user,
+				is_admin : req.session.user.is_admin
       });
     });
   });
@@ -17,6 +19,8 @@ exports.showAdd = function(req, res) {
       if (err) return next(err);
       res.render('add_purchases', {
         products: products,
+        user : req.session.user,
+				is_admin : req.session.user.is_admin
       });
     });
   });
@@ -54,7 +58,9 @@ exports.get = function(req, res, next) {
         });
         res.render('edit_purchases', {
           products: products,
-          data: purchase
+          data: purchase,
+          user : req.session.user,
+  				is_admin : req.session.user.is_admin
         });
       });
     });

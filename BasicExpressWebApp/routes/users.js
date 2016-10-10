@@ -6,12 +6,15 @@ exports.show = function (req, res, next) {
     		res.render( 'users', {
 					no_users : results.length === 0,
 					users : results,
+					user : req.session.user,
+					is_admin : req.session.user.is_admin
     		});
       	});
 	});
 };
 exports.showAdd = function(req, res){
-	res.render('add_user');
+	res.render('add_user',{user : req.session.user,
+		is_admin : req.session.user.is_admin});
 }
 
 exports.add = function(req, res, next) {
@@ -39,7 +42,8 @@ exports.get = function(req, res, next){
 		connection.query('SELECT * FROM users WHERE user_id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			console.log(rows);
-			res.render('edit_users',{page_title:"Edit Customers - Node.js", data : rows[0]});
+			res.render('edit_users',{page_title:"Edit Customers - Node.js", data : rows[0],	user : req.session.user,
+				is_admin : req.session.user.is_admin});
 		});
 	});
 };

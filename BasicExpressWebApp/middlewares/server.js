@@ -1,56 +1,42 @@
-app.get('/login',function(req, res, next)(
-  return res.render("/login");
-));
-
-app.post('/login',function(req, res , next){
-  if(req.body.username && req.password){
-    return(next);
-  }else{
-    var err = new error("user credentials required");
-    err.status = 400;
-    return next(err);
+function loggedOut(req, res, next){
+  if(req.session && req.session.user){
+    return res.redirect('/home');
   }
-})
-app.get('/singup',function(req, res, next){
-  return res.render('signup');
-});
-
-app.post('/signup',function(req, res, next){
-if(req.body.username &&
-req.body.password &&
-req.body.confirmPassword){
-  if req.body.password !== req.body.confirmPassword{
-    var err = new error("password do not match");
-    err.status = 400;
-    return next(err);
+  return next();
+}
+function requiresLogin(req, res, next){
+  if(req.session && req.session.user){
+    return next();
   }
-}else{
-    var err = new Error("all fields are required");
-    err.status = 400;
-    return next(err);
+  else {
+    req.flash("warning", "You must be logged in to view this page.");
+    return res.redirect("/login");
   }
-});
-
-app.get('/', function(req, res){
-  res.redirect("/home");
-});
-
-app.get('/categories',function(req, res, next){
-  return res.render('categories');
-});
-
-app.get('/products',function(req, res, next){
-  return res.render('products');
-});
-
-app.get('/sales',function(req, res, next){
-  return res.render('sales');
-});
-
-app.get('/purchases',function(req, res, next){
-  return res.render('purchases');
-});
-
-app.get('/weeklyStatistics',function(req, res, next){
-  return res.render('weeklyStatistics');
-});
+}
+//If visitor is not Admin warn them
+function requiresLoginAsAdmin(req, res, next){
+  // if(req.session.user.is_admin){
+  //   return next();
+  // }
+  if(req.session.user.is_admin){
+    return next();
+  }
+  else {
+    req.flash("warning", "You must be logged in as admin to view this page.");
+    return res.redirect("/");
+  }
+}
+//If there current user is loggedin or registered
+function registered(req, res, next){
+  if(req.session){
+    return next();
+  }
+  else {
+    req.flash("warning", "You must be Registered.");
+    return res.redirect("/");
+  }
+}
+module.exports.loggedOut = loggedOut;
+module.exports.requiresLogin = requiresLogin;
+module.exports.requiresLoginAsAdmin = requiresLoginAsAdmin;
+module.exports.registered = registered;

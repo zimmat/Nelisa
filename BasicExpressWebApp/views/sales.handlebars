@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Sales Table</h2>
-    {{#if user.is_admin}}<a href="/sales/add">Add new sales record</a>{{/if}}
+    {{#if is_admin}}<a href="/sales/add">Add new sales record</a>{{/if}}
   <table class="table">
     <thead>
       <tr>
@@ -21,7 +21,7 @@
           <td>{{quantity}}</td>
           <td>{{sales_price}}</td>
           <td>{{product_id}}</td>
-          {{#if user.is_admin}}  <td> <a href="/sales/edit/{{sales_id}}">Edit</a>
+          {{#if ../is_admin}}  <td> <a href="/sales/edit/{{sales_id}}">Edit</a>
               <a href="/sales/delete/{{sales_id}}">Delete</a>
             </td>{{/if}}
         </tr>

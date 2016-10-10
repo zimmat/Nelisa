@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Purchases Table</h2>
-  {{#if user.is_admin}}  <a href="/purchases/add">Add new record</a>{{/if}}
+  {{#if is_admin}}  <a href="/purchases/add">Add new record</a>{{/if}}
   <table class="table">
     <thead>
       <tr>
@@ -23,7 +23,7 @@
           <td>{{quantity}}</td>
           <td>{{cost}}</td>
           <td>{{product_id}}</td>
-        {{#if user.is_admin}}  <td><a href="/purchases/edit/{{purchase_id}}">Edit</a>
+        {{#if ../is_admin}}  <td><a href="/purchases/edit/{{purchase_id}}">Edit</a>
           <a href="/purchases/delete/{{purchase_id}}">Delete</a>
       </td>  {{/if}}</tr>
 
