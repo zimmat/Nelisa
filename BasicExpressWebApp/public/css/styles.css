@@ -1,6 +1,10 @@
 .jumbotron {
   text-align: center;
 }
+body {
+  background: #ffffff url("/imgs/tumblr_m4e2mpMISI1qmrlvoo1_500.jpg") no-repeat;
+}
+
 .login {
   background: #eceeee;
   border: 1px solid #42464b;
