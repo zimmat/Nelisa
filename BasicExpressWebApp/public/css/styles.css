@@ -4,7 +4,9 @@
 body {
   background: #ffffff url("/imgs/nelisa.jpg") no-repeat;
 }
-
+.table {
+  background-color: white;
+}
 .login {
   background: #eceeee;
   border: 1px solid #42464b;
