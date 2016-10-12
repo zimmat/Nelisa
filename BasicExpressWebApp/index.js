@@ -12,7 +12,7 @@ categories = require('./routes/categories'),
   users = require('./routes/users'),
   flash = require('express-flash'),
   signup = require('./routes/signup');
-  middleware = require('./middlewares/server');
+middleware = require('./middlewares/server');
 
 
 var app = express();
@@ -37,7 +37,7 @@ app.set('view engine', 'handlebars');
 app.use(session({
   secret: 'keyboard cat',
   cookie: {
-    maxAge: 60000
+    maxAge: 60000 * 30 // expire after 30 minutes
   }
 }));
 app.use(function(req, res, next) {
@@ -58,14 +58,14 @@ app.use(bodyParser.urlencoded({
   // parse application/json
 app.use(bodyParser.json())
 
-app.get("/signup", middleware.loggedOut, function(req, res, next){
-res.render("signup");
+app.get("/signup", middleware.loggedOut, function(req, res, next) {
+  res.render("signup");
 });
 
-app.get("/login",middleware.loggedOut, function(req, res) {
-res.render("login", {
-  showNavBar: false
-});
+app.get("/login", middleware.loggedOut, function(req, res) {
+  res.render("login", {
+    showNavBar: false
+  });
 });
 app.get("/", function(req, res) {
   res.redirect("/home");
@@ -80,10 +80,10 @@ app.post("/login", function(req, res) {
   var user1 = [];
   if (req.body.username) {
     var user = {
-      name: req.body.username,
-      password: req.body.password,
-    }
-    // console.log(user.password);
+        name: req.body.username,
+        password: req.body.password,
+      }
+      // console.log(user.password);
     user1.push(user);
     req.getConnection(function(err, connection) {
       connection.query('SELECT * FROM users', [], function(err, database) {
@@ -96,29 +96,28 @@ app.post("/login", function(req, res) {
                 is_admin: rolesMap[req.body.username] === "admin",
                 user: rolesMap[req.body.username] === "user"
               };
-               console.log(req.session.user);
+              console.log(req.session.user);
               res.redirect("/home");
             }
             if (dbUser.username === input.name && dbUser.password !== input.password) {
-              req.flash("warning","wrong password");
+              req.flash("warning", "wrong password");
               return res.redirect('/login');
             }
           });
         });
       });
     });
+  } else {
+    req.flash("warning", "all fields required");
+    return res.redirect('/login');
   }
-else {
-  req.flash("warning","all fields required");
-  return res.redirect('/login');
-}
 
 });
 app.get("/home", checkUser, function(req, res) {
-res.render("home", {
-  user: req.session.user,
-  is_admin: req.session.user.is_admin
-})
+  res.render("home", {
+    user: req.session.user,
+    is_admin: req.session.user.is_admin
+  })
 });
 
 app.get("/logout", function(req, res) {
@@ -134,45 +133,45 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-app.get('/sales/:week', middleware.requiresLogin,weeklyStats.show);
+app.get('/sales/:week', middleware.requiresLogin, weeklyStats.show);
 
 
-app.get('/categories', middleware.requiresLogin,categories.show);
-app.get('/categories/add',middleware.requiresLogin,categories.showAdd);
-app.get('/categories/edit/:category_id',middleware.requiresLogin, categories.get);
-app.post('/categories/update/:category_id',middleware.requiresLogin, categories.update);
-app.post('/categories/add',middleware.requiresLogin, categories.add);
-app.get('/categories/delete/:category_id',middleware.requiresLogin, categories.delete);
+app.get('/categories', middleware.requiresLogin, categories.show);
+app.get('/categories/add', middleware.requiresLoginAsAdmin, categories.showAdd);
+app.get('/categories/edit/:category_id', middleware.requiresLoginAsAdmin, categories.get);
+app.post('/categories/update/:category_id', middleware.requiresLoginAsAdmin, categories.update);
+app.post('/categories/add', middleware.requiresLoginAsAdmin, categories.add);
+app.get('/categories/delete/:category_id', middleware.requiresLoginAsAdmin, categories.delete);
 
 
-app.get('/products',middleware.requiresLogin, products.show);
-app.get('/products/add', middleware.requiresLogin,products.showAdd);
-app.post('/products/add',middleware.requiresLogin,products.add);
-app.get('/products/edit/:product_id',middleware.requiresLogin,products.get);
-app.post('/products/update/:product_id',middleware.requiresLogin,products.update);
-app.get('/products/delete/:product_id',middleware.requiresLogin, products.delete);
+app.get('/products', middleware.requiresLogin, products.show);
+app.get('/products/add', middleware.requiresLoginAsAdmin, products.showAdd);
+app.post('/products/add', middleware.requiresLoginAsAdmin, products.add);
+app.get('/products/edit/:product_id', middleware.requiresLoginAsAdmin, products.get);
+app.post('/products/update/:product_id', middleware.requiresLoginAsAdmin, products.update);
+app.get('/products/delete/:product_id', middleware.requiresLoginAsAdmin, products.delete);
 
-app.get('/sales',middleware.requiresLogin,sales.show);
-app.get('/sales/add',middleware.requiresLogin,sales.showAdd);
-app.get('/sales/edit/:sales_id',middleware.requiresLogin,sales.get);
-app.post('/sales/update/:sales_id',middleware.requiresLogin,sales.update);
-app.post('/sales/add', middleware.requiresLogin,sales.add);
-app.get('/sales/delete/:sales_id',middleware.requiresLogin,sales.delete);
+app.get('/sales', middleware.requiresLogin, sales.show);
+app.get('/sales/add', middleware.requiresLoginAsAdmin, sales.showAdd);
+app.get('/sales/edit/:sales_id', middleware.requiresLoginAsAdmin, sales.get);
+app.post('/sales/update/:sales_id', middleware.requiresLoginAsAdmin, sales.update);
+app.post('/sales/add', middleware.requiresLoginAsAdmin, sales.add);
+app.get('/sales/delete/:sales_id', middleware.requiresLoginAsAdmin, sales.delete);
 
 
-app.get('/purchases',middleware.requiresLogin, purchases.show);
-app.get('/purchases/add',middleware.requiresLogin, purchases.showAdd);
-app.get('/purchases/edit/:purchase_id',middleware.requiresLogin, purchases.get);
-app.post('/purchases/update/:purchase_id',middleware.requiresLogin, purchases.update);
-app.post('/purchases/add',middleware.requiresLogin, purchases.add);
-app.get('/purchases/delete/:purchase_id',middleware.requiresLogin, purchases.delete);
+app.get('/purchases', middleware.requiresLogin, purchases.show);
+app.get('/purchases/add', middleware.requiresLoginAsAdmin, purchases.showAdd);
+app.get('/purchases/edit/:purchase_id', middleware.requiresLoginAsAdmin, purchases.get);
+app.post('/purchases/update/:purchase_id', middleware.requiresLoginAsAdmin, purchases.update);
+app.post('/purchases/add', middleware.requiresLoginAsAdmin, purchases.add);
+app.get('/purchases/delete/:purchase_id', middleware.requiresLoginAsAdmin, purchases.delete);
 
-app.get('/users',middleware.requiresLogin, users.show);
-app.get('/users/add',middleware.requiresLogin, users.showAdd);
-app.post('/users/add',middleware.requiresLogin, users.add);
-app.get('/users/edit/:user_id',middleware.requiresLogin, users.get);
-app.post('/users/update/:users_id',middleware.requiresLogin,middleware.requiresLogin, users.update);
-app.get('/users/delete/:user_id',middleware.requiresLogin, users.delete);
+app.get('/users', middleware.requiresLoginAsAdmin, users.show);
+app.get('/users/add', middleware.requiresLoginAsAdmin, users.showAdd);
+app.post('/users/add', middleware.requiresLoginAsAdmin, users.add);
+app.get('/users/edit/:user_id', middleware.requiresLoginAsAdmin, users.get);
+app.post('/users/update/:users_id', middleware.requiresLoginAsAdmin, middleware.requiresLogin, users.update);
+app.get('/users/delete/:user_id', middleware.requiresLoginAsAdmin, users.delete);
 
 app.use(errorHandler);
 

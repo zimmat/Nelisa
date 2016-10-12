@@ -50,10 +50,10 @@ exports.get = function(req, res, next){
 			connection.query('SELECT * FROM products WHERE product_id = ?', [id], function(err,products){
 				if(err) return next(err);
 				var product = products[0];
-				categories = categories.map(function(category){
-					category.selected = category.id === product.category_id ? "selected" : "";
-					return category;
-				});
+					categories = categories.map(function(category){
+						category.selected = category.id === product.category_id ? "selected" : "";
+						return category;
+					});
 				res.render('edit', {
 					categories : categories,
 					data : product,
