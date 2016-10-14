@@ -11,8 +11,9 @@ categories = require('./routes/categories'),
   purchases = require('./routes/purchases'),
   users = require('./routes/users'),
   flash = require('express-flash'),
-  signup = require('./routes/signup');
-middleware = require('./middlewares/server');
+  signup = require('./routes/signup'),
+middleware = require('./middlewares/server'),
+bcrypt = require('bcrypt');
 
 
 var app = express();
@@ -26,7 +27,7 @@ var dbOptions = {
 
 var rolesMap = {
   "Nelisa": "admin",
-  "Zee": "user"
+  "Zee": "Viewer"
 };
 
 //setup template handlebars as the template engine
@@ -94,7 +95,7 @@ app.post("/login", function(req, res) {
               req.session.user = {
                 name: req.body.username,
                 is_admin: rolesMap[req.body.username] === "admin",
-                user: rolesMap[req.body.username] === "user"
+                user: rolesMap[req.body.username] === "Viewer"
               };
               console.log(req.session.user);
               res.redirect("/home");
@@ -172,6 +173,9 @@ app.post('/users/add', middleware.requiresLoginAsAdmin, users.add);
 app.get('/users/edit/:user_id', middleware.requiresLoginAsAdmin, users.get);
 app.post('/users/update/:users_id', middleware.requiresLoginAsAdmin, middleware.requiresLogin, users.update);
 app.get('/users/delete/:user_id', middleware.requiresLoginAsAdmin, users.delete);
+
+app.get('/signup',signup.showSignup);
+app.post('/signup/add',signup.add);
 
 app.use(errorHandler);
 

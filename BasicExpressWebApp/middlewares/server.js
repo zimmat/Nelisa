@@ -23,7 +23,17 @@ function requiresLoginAsAdmin(req, res, next){
     return res.redirect("/login");
   }
 }
+function registered(re,res,next){
+  if(req.session){
+    return next();
+  }
+  else{
+    req.flash("warning","you must be registered to view this page");
+    return res.redirect("/")
+  }
+}
 
 exports.loggedOut = loggedOut;
 exports.requiresLogin = requiresLogin;
 exports.requiresLoginAsAdmin = requiresLoginAsAdmin;
+exports.registered = registered;

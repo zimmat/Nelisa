@@ -23,9 +23,8 @@ exports.add = function(req, res, next) {
     var data = {
       username: req.body.username,
       password: req.body.password,
-      user: req.session.user,
-			is_admin: req.session.is_admin
-
+			Role: req.body.Role,
+      
     };
 
     connection.query('insert into users set ?', data, function(err, results) {

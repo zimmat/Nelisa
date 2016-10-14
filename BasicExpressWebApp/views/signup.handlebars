@@ -2,15 +2,12 @@
   <div class="header">
     Register
   </div>
-  <form action="/signup" method="POST">
+  <form action="/signup/add" method="POST">
   <div class="register">
-      <input type="text" required placeholder="Username" id="username">
-      <input type="password" required placeholder="Password" id="password">
-      <input type="password" required placeholder="Confirm password" id="confirm password">
-    <div class="group" style="margin-top:60px">
-      <select name="role">
-  <option value="Role">Viewer</option>
-</select>
-      <input type="button" class="button-raised" value="REGISTER">
-    </div>
+    <input type="text" name="username" value="{{username}}" placeholder="username">
+      <input type="text" name="password" value="{{password}}" placeholder="password">
+      <input type="password" required placeholder="Confirm password" id="confirm password"><br>
+      <input type="text" name="Role" value="Viewer"><br>
+  <input type="submit"><br>
   </div>
+</form>

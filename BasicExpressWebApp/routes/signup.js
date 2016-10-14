@@ -1,12 +1,12 @@
-exports.showRegister = function(req, res){
+exports.showSignup = function(req, res){
 	res.render('signup');
 }
 
-exports.register = function(req, res, next) {
+exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     var data = {
-      user_name: req.body.user_name,
+      username: req.body.username,
       password: req.body.password,
       Role: req.body.Role
 

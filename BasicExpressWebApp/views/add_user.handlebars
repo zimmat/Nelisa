@@ -1,43 +1,16 @@
-<!-- <h1>Add User</h1>
-
+<h1>Add User</h1>
 <form action="/users/add" method="POST">
-  <div class="register">
-    <div>
-      <input type="text" required placeholder="Username" id={{user_name}}>
-    </div>
-    <div>
-      <input type="password" required placeholder="Password" id="{{password}}">
-    </div>
-    <div>
-      <input type="password" required placeholder="Confirm password" id="confirm password">
-    </div>
-    <div class="group" style="margin-top:60px">
-      <input type="button" class="button-raised" value="REGISTER">
-    </div>
-  </div> -->
-
-  <h1>login</h1>
-  <div class="login">
-
-  <form class="" action="/login" method="post">
-      <input type="text" name="username" value="" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <a href="/signup" class="forgot">forgot password?</a>
-    <input type="submit"  value="login">
+  <div>
+    <label for="">Username</label>
+    <input type="text" name="username" value="{{user_name}}">
   </div>
-  </form>
-
-  <!-- <div>
-	<label for="">Username</label>
-	<input type="text" name="user_name" value="{{user_name}}">
-</div>
-<div>
-  <label for="">Password</label>
-  <input type="text" name="password" value="{{password}}">
-</div>
-<div>
-  <label for="">Role</label>
-  <input type="text" name="Role" value="{{Role}}">
-</div>
-	<input type="submit"> -->
+  <div>
+    <label for="">Password</label>
+    <input type="text" name="password" value="{{password}}">
+  </div>
+  <div>
+    <label for="">Role</label>
+    <input type="text" name="Role" value="{{Role}}">
+  </div>
+	<input type="submit">
 </form>
