@@ -14,6 +14,9 @@ categories = require('./routes/categories'),
   signup = require('./routes/signup'),
 middleware = require('./middlewares/server'),
 bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
 
 
 var app = express();
