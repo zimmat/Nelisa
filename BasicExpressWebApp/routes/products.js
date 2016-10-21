@@ -68,9 +68,8 @@ exports.get = function(req, res, next){
 exports.update = function(req, res, next){
 
 	var data = {
-		category_id : Number(req.body.category_id),
-		description : req.body.description,
-		price : Number(req.body.price)
+			category_id : Number(req.body.category_id),
+					product_name : req.body.product_name,
 	};
   	var id = req.params.id;
   	req.getConnection(function(err, connection){

@@ -109,6 +109,9 @@ input[type="submit"] {
   border-bottom-left-radius:5px;
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999;
 }
+.pull-right{
+  color: black !important;
+}
 
 .shadow {
   background: #000;
@@ -127,6 +130,23 @@ input[type="submit"] {
   height: 360px;
   margin: 20px auto 0;
   width: 298px;
+}
+body{
+  padding:20px 20px;
+}
+
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px;
+  color:#ccc;
 }
 /*.register header {
   background-image: linear-gradient(top, #f1f3f3, #d4dae0);
