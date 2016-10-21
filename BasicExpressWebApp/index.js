@@ -82,6 +82,7 @@ var checkUser = function(req, res, next) {
 };
 app.post("/login", function(req, res) {
   var user1 = [];
+  var password = req.body.password;
   if (req.body.username) {
     var user = {
         name: req.body.username,
@@ -92,31 +93,28 @@ app.post("/login", function(req, res) {
     req.getConnection(function(err, connection) {
       connection.query('SELECT * FROM users', [], function(err, database) {
         if (err) return next(err);
-        database.forEach(function(dbUser) {
-          user1.forEach(function(input) {
-            if (dbUser.username === input.name && dbUser.password === input.password) {
+          bcrypt.compare(password, user.password, function(err, result) {
+            console.log(result);
               req.session.user = {
                 name: req.body.username,
                 is_admin: rolesMap[req.body.username] === "admin",
                 user: rolesMap[req.body.username] === "Viewer"
               };
               console.log(req.session.user);
-              res.redirect("/home");
-            }
-            if (dbUser.username === input.name && dbUser.password !== input.password) {
-              req.flash("warning", "wrong password");
-              return res.redirect('/login');
-            }
+              return res.redirect("/home");
+            })
+            // if (dbUser.username === input.name && dbUser.password !== input.password) {
+            //   req.flash("warning", "wrong password");
+            //   return res.redirect('/login');
+            // }
           });
         });
-      });
-    });
-  } else {
-    req.flash("warning", "all fields required");
-    return res.redirect('/login');
-  }
+    }  else {
+        req.flash("warning", "all fields required");
+        return res.redirect('/login');
+      }
+  });
 
-});
 app.get("/home", checkUser, function(req, res) {
   res.render("home", {
     user: req.session.user,
