@@ -1,6 +1,9 @@
 .jumbotron {
   text-align: center;
 }
+h2 {
+  text-align: center;
+}
 body {
   background: #ffffff url("/imgs/nelisa.jpg") no-repeat;
 }
