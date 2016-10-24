@@ -1,42 +1,15 @@
-<div class="container">
-  <h2>Products Table</h2>
-    <input type="text" name="search" placeholder="Search.."><br>
-  {{#if is_admin}}<a href="/products/add">Add a new product</a>{{/if}}
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Product-Id</th>
-        <th>Product Name</th>
-    {{#if is_admin}}<th>Admin_options</th>{{/if}}
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        {{#products}}
-        <td>{{product_id}}
-        <td>{{product_name}}</td>
-        {{#if ../is_admin}}  <td><a href="/products/edit/{{product_id}}">Edit</a>
-          <a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
-        </tr>
-        {{/products}}
-    </tbody>
-  </table>
-</div>
-
-</body>
-
-
 <div class="form-group pull-right">
+  <h2>Products Table</h2>
     <input type="text" class="search form-control" placeholder="What you looking for?">
 </div>
 <span class="counter pull-right"></span>
 <table class="table table-hover table-bordered results">
   <thead>
     <tr>
-      <th>#</th>
+      <th class="col-md-2 col-xs-2">Product-Id</th>
       <th class="col-md-5 col-xs-5">Product Name</th>
-      <th class="col-md-4 col-xs-4">Category Name</th>
-      <th class="col-md-3 col-xs-3">Admin Options</th>
+      <th class="col-md-3 col-xs-3">Category Name</th>
+      {{#if is_admin}}<th class="col-md-4 col-xs-4">Admin Options</th>{{/if}}
     </tr>
     <tr class="warning no-result">
       <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -44,28 +17,13 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Vatanay Özbeyli</td>
-      <td>UI & UX</td>
-      <td>Istanbul</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Burak Özkan</td>
-      <td>Software Developer</td>
-      <td>Istanbul</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Egemen Özbeyli</td>
-      <td>Purchasing</td>
-      <td>Kocaeli</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Engin Kızıl</td>
-      <td>Sales</td>
-      <td>Bozuyük</td>
-    </tr>
+      {{#products}}
+      <td>{{product_id}}
+      <td>{{product_name}}</td>
+      <td>{{category_name}}</td>
+      {{#if ../is_admin}}  <td><a href="/products/edit/{{product_id}}">Edit</a>
+        <a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
+      </tr>
+      {{/products}}
   </tbody>
 </table>
