@@ -6,6 +6,7 @@
 <table class="table table-hover table-bordered results">
   <thead>
     <tr>
+      <a href="/sales/add">Add a new sales record</a>
       <th class="col-md-1 col-xs-1">Sales-Id</th>
       <th class="col-md-1 col-xs-1">Sales Date</th>
       <th class="col-md-3 col-xs-3">Product Name</th>
@@ -25,8 +26,8 @@
       <td>{{product_name}}</td>
       <td>{{quantity}}</td>
       <td>{{sales_price}}</td>
-      {{#if ../is_admin}}  <td><a href="/products/edit/{{product_id}}">Edit</a>
-        <a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
+      {{#if ../is_admin}}  <td><a href="/sales/edit/{{sales_id}}">Edit</a>
+        <a href="/sales/delete/{{sales_id}}">Delete</a></td>{{/if}}
       </tr>
       {{/sales}}
   </tbody>
