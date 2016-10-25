@@ -30,7 +30,8 @@ var dbOptions = {
 
 var rolesMap = {
   "Nelisa": "admin",
-  "Zee": "Viewer"
+  "Zee": "Viewer",
+  "Zimkhitha" : "admin"
 };
 
 //setup template handlebars as the template engine
