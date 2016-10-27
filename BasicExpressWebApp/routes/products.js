@@ -45,13 +45,14 @@ exports.add = function (req, res, next) {
 exports.get = function(req, res, next){
 	var id = req.params.product_id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * FROM categories', [id], function(err, categories){
+		connection.query('SELECT * FROM categories', [], function(err, categories){
 			if(err) return next(err);
 			connection.query('SELECT * FROM products WHERE product_id = ?', [id], function(err,products){
 				if(err) return next(err);
 				var product = products[0];
 					categories = categories.map(function(category){
-						category.selected = category.id === product.category_id ? "selected" : "";
+						category.selected = category.category_id === product.category_id ? "selected" : "";
+						// return
 						return category;
 					});
 				res.render('edit', {
@@ -74,7 +75,7 @@ exports.update = function(req, res, next){
   	var id = req.params.id;
   	req.getConnection(function(err, connection){
 		if (err) return next(err);
-		connection.query('UPDATE products SET ? WHERE id = ?', [data, id], function(err, rows){
+		connection.query('UPDATE products SET ? WHERE product_id = ?', [data, id], function(err, rows){
 			if (err) return next(err);
       		res.redirect('/products');
 		});

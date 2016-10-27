@@ -7,14 +7,15 @@
   <thead>
     <tr>
       <a href="/purchases/add">Add a new purchase record</a>
-      <th class="col-md-1 col-xs-1">Purchase-Id</th>
       <th class="col-md-2 col-xs-2">Shop Name</th>
-      <th class="col-md-1 col-xs-1">Purchase Date</th>
+      <th class="col-md-2 col-xs-2">Purchase Date</th>
       <th class="col-md-3 col-xs-3">Product Name</th>
       <th class="col-md-1 col-xs-1">Quantity</th>
       <th class="col-md-1 col-xs-1">Cost</th>
       <th class="col-md-1 col-xs-1">Product-Id</th>
-      {{#if is_admin}}<th class="col-md-3 col-xs-3">Admin Options</th>{{/if}}
+      {{#if is_admin}}<th class="col-md-2 col-xs-2">Edit record</th>
+      <th class="col-md-2 col-xs-2">Delete record</th>
+      {{/if}}
     </tr>
     <tr class="warning no-result">
       <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -24,54 +25,16 @@
     <tr>
       {{#purchases}}
         <tr>
-          <td>{{purchase_id}}</td>
           <td>{{shopName}}</td>
           <td>{{purchase_date}}</td>
           <td>{{product_name}}</td>
           <td>{{quantity}}</td>
           <td>{{cost}}</td>
           <td>{{product_id}}</td>
-        {{#if ../is_admin}}  <td><a href="/purchases/edit/{{purchase_id}}">Edit</a>
-          <a href="/purchases/delete/{{purchase_id}}">Delete</a>
+        {{#if ../is_admin}}  <td><a href="/purchases/edit/{{purchase_id}}">Edit</a></td>
+          <td><a href="/purchases/delete/{{purchase_id}}">Delete</a>
       </td>  {{/if}}</tr>
 
       {{/purchases}}
   </tbody>
 </table>
-
-
-<div class="container">
-  <h2>Purchases Table</h2>
-  {{#if is_admin}}  <a href="/purchases/add">Add new purchase record</a>{{/if}}
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Purchase-Id</th>
-        <th>Shop Name</th>
-        <th>Purchase Date</th>
-        <th>Product Name</th>
-        <th>Quantity</th>
-        <th>Cost</th>
-        <th>Product-Id</th>
-        {{#if is_admin}}<th>Admin_options</th>{{/if}}
-      </tr>
-    </thead>
-    <tbody>
-      {{#purchases}}
-        <tr>
-          <td>{{purchase_id}}</td>
-          <td>{{shopName}}</td>
-          <td>{{purchase_date}}</td>
-          <td>{{product_name}}</td>
-          <td>{{quantity}}</td>
-          <td>{{cost}}</td>
-          <td>{{product_id}}</td>
-        {{#if ../is_admin}}  <td><a href="/purchases/edit/{{purchase_id}}">Edit</a>
-          <a href="/purchases/delete/{{purchase_id}}">Delete</a>
-      </td>  {{/if}}</tr>
-
-      {{/purchases}}
-    </tbody>
-  </table>
-</div>
-</body

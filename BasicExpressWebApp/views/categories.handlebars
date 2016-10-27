@@ -5,7 +5,8 @@
       <tr>
         <th>Category ID</th>
         <th>Category Name</th>
-        {{#if is_admin}}<th>Admin Options</th>
+        {{#if is_admin}}<th>Edit</th>
+        <th>delete</th>
     <a href="/categories/add">Add a new category</a>
     {{else}}
     <a href=""></a>
@@ -19,8 +20,8 @@
         <td>{{category_name}}</td>
         {{#if ../is_admin}}
         <td>
-          <a href="/categories/edit/{{category_id}}">Edit</a>
-          <a href="/categories/delete/{{category_id}}">Delete</a>
+          <a href="/categories/edit/{{category_id}}">Edit</a></td>
+        <td>  <a href="/categories/delete/{{category_id}}">Delete</a>
         </td>
         {{else}}
         <td></td>

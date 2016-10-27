@@ -1,12 +1,12 @@
 <h1>Edit purchases</h1>
 
-<form action="/sales/update/{{data.purchase_id}}" method="POST">
+<form action="/purchases/update/{{data.purchase_id}}" method="POST">
 
 	<div class="">
 		<label for="">Product</label>
 		<select class="" name="product_id">
 			{{#products}}
-				<option {{selected}} value="{{data.product_id}}">{{product_name}}</option>
+				<option {{selected}} value="{{product_id}}">{{product_name}}</option>
 			{{/products}}
 		</select>
 	</div>
@@ -16,7 +16,7 @@
   </div>
   <div>
     <label for="">Date</label>
-    <input type="datetime-local" name="purchase_date" value="{{data.purchase_date}}">
+    <input type="date" name="purchase_date" value="{{data.purchase_date}}">
   </div>
   <div>
     <label for="">Quantity</label>

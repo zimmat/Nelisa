@@ -10,7 +10,8 @@
       <th class="col-md-2 col-xs-2">Product-Id</th>
       <th class="col-md-5 col-xs-5">Product Name</th>
       <th class="col-md-3 col-xs-3">Category Name</th>
-      {{#if is_admin}}<th class="col-md-4 col-xs-4">Admin Options</th>{{/if}}
+      {{#if is_admin}}<th class="col-md-2 col-xs-2"> Edit product</th>
+      <th class="col-md-3 col-xs-3"> Delete product</th>{{/if}} 
     </tr>
     <tr class="warning no-result">
       <td colspan="4"><i class="fa fa-warning"></i> No result</td>
@@ -22,8 +23,8 @@
       <td>{{product_id}}
       <td>{{product_name}}</td>
       <td>{{category_name}}</td>
-      {{#if ../is_admin}}  <td><a href="/products/edit/{{product_id}}">Edit</a>
-        <a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
+      {{#if ../is_admin}}<td><a href="/products/edit/{{product_id}}">Edit</a></td>
+        <td><a href="/products/delete/{{product_id}}">Delete</a></td>{{/if}}
       </tr>
       {{/products}}
   </tbody>
