@@ -7,11 +7,14 @@
     "test": "test"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-flash": "git://github.com/RGBboy/express-flash.git",
     "express-handlebars": "^3.0.0",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.14.1",
+    "flash": "^1.1.0",
     "handlebars": "^4.0.5"
   },
   "devDependencies": {

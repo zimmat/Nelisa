@@ -26,8 +26,8 @@ create table purchases (
     product_id int,foreign key (product_id) references products(product_id)
 )ENGINE=INNODB;
 
-create table users(
+create table encryption(
     user_id int primary key auto_increment,
-    user_name char(100) not null,password char(100) not null
+    username char(100) not null,password char(100) not null
 )ENGINE=INNODB;
 
