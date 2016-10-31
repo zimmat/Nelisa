@@ -10,8 +10,9 @@ exports.add = function(req, res, next) {
     var data = {
       username: req.body.username,
       password: req.body.password,
-				Role: req.body.Role,
+      confirmPassword: req.body.confirmPassword
     };
+
     console.log(data);
     var password = req.body.password;
     bcrypt.hash(password, 10, function(err, hash) {

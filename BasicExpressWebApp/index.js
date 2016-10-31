@@ -12,9 +12,9 @@ categories = require('./routes/categories'),
   users = require('./routes/users'),
   flash = require('express-flash'),
   signup = require('./routes/signup'),
+  statistics = require('./routes/statistics'),
 middleware = require('./middlewares/server'),
 bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 
 
@@ -176,8 +176,12 @@ app.get('/users/edit/:user_id', middleware.requiresLoginAsAdmin, users.get);
 app.post('/users/update/:users_id', middleware.requiresLoginAsAdmin, middleware.requiresLogin, users.update);
 app.get('/users/delete/:user_id', middleware.requiresLoginAsAdmin, users.delete);
 
+app.get('/statistics',statistics.MostpopularProduct);
+
+
 app.get('/signup',signup.showSignup);
 app.post('/signup/add',signup.add);
+// app.get('')
 
 app.use(errorHandler);
 

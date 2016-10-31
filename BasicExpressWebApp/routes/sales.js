@@ -1,7 +1,7 @@
 exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    connection.query("select DATE_FORMAT(sales.Sales_date,'%Y-%m-%d') as Sales_date,sales.sales_id,products.product_name,sales.quantity,sales.sales_price,sales.product_id from products inner join sales on products.product_id = sales.product_id order by Sales_date;", [], function(err, results) {
+    connection.query("select DATE_FORMAT(sales.Sales_date,'%m/%d/%Y') as Sales_date,sales.sales_id,products.product_name,sales.quantity,sales.sales_price,sales.product_id from products inner join sales on products.product_id = sales.product_id order by Sales_date;", [], function(err, results) {
       if (err) return next(err);
       res.render('sales', {
         no_products: results.length === 0,
@@ -82,7 +82,7 @@ exports.update = function(req, res, next) {
   var id = req.params.sales_id;
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    connection.query('UPDATE sales SET ? WHERE sales_id = ?', [data, id], function(err, rows) {
+    connection.query('UPDATE sales SET ? WHERE p_id = ?', [data, id], function(err, rows) {
       if (err) return next(err);
       res.redirect('/sales');
     });
