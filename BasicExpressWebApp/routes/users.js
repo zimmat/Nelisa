@@ -1,24 +1,5 @@
 var mysql = require('mysql');
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
-var salt = bcrypt.genSaltSync(saltRounds);
-var hash = bcrypt.hashSync(myPlaintextPassword, salt);
-
-//generating a hash
-bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
-        // Store hash in your password DB.
-    });
-});
-//check if password match
-bcrypt.compareSync(myPlaintextPassword, hash); // true
-bcrypt.compareSync(someOtherPlaintextPassword, hash); // false
-
-
-
-
 
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){

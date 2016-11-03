@@ -1,3 +1,4 @@
+
 exports.show = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
@@ -12,30 +13,43 @@ exports.show = function(req, res, next) {
     });
   });
 }
-exports.showAdd = function(req, res) {
-  req.getConnection(function(err, connection) {
+const showAddScreen = function(req,res,purchaseData){
+    req.getConnection(function(err, connection) {
+  connection.query('SELECT * from products', function(err, products) {
     if (err) return next(err);
-    connection.query('SELECT * from products', function(err, products) {
-      if (err) return next(err);
-      res.render('add_purchases', {
-        products: products,
-        user : req.session.user,
-				is_admin : req.session.user.is_admin
-      });
-    });
+  res.render('add_purchases', {
+    products : products,
+    user : req.session.user,
+    is_admin : req.session.user.is_admin,
+    purchaseData: purchaseData
   });
+});
+});
 };
+exports.showAdd = function(req, res) {
+      showAddScreen(req, res, {})
+    };
+
 
 exports.add = function(req, res, next) {
-
+  var moment = require('moment');
+  moment().format();
+  var input = req.body
   req.getConnection(function(err, connection) {
     if (err) return next(err);
-    var data = {
-      shopName: req.body.shopName,
-      purchase_date: req.body.purchase_date,
-      quantity: req.body.quantity,
-      cost: req.body.cost,
-      product_id: req.body.product_id
+    var error = false;
+    const todayOrEarlier = moment(input.purchase_date).isSameOrBefore(moment());
+    if(!todayOrEarlier){
+      req.flash("warning","picking future dates restricted");
+      error = true;
+    }
+    if(error) return showAddScreen(req, res,input )
+        var data = {
+      shopName: input.shopName,
+      purchase_date: input.purchase_date,
+      quantity: input.quantity,
+      cost: input.cost,
+      product_id: input.product_id
     };
     connection.query('insert into purchases set ?', data, function(err, results) {
       if (err)
@@ -68,14 +82,24 @@ exports.get = function(req, res, next) {
 };
 
 exports.update = function(req, res, next) {
-
+  var moment = require('moment');
+  moment().format();
+  var input = req.body
+  req.getConnection(function(err, connection) {
+    if (err) return next(err);
+    var error = false;
+    const todayOrEarlier = moment(input.purchase_date).isSameOrBefore(moment());
+    if(!todayOrEarlier){
+      req.flash("warning","picking future dates restricted");
+      error = true;
+    }
+      if(error) return showAddScreen(req, res,input )
   var data = {
-    shopName: req.body.shopName,
-    purchase_date: req.body.purchase_date,
-    // product_name: req.body.product_name,
-    quantity: req.body.quantity,
-    cost: req.body.cost,
-    product_id: req.body.product_id
+    shopName: input.shopName,
+    purchase_date: input.purchase_date,
+    quantity: input.quantity,
+    cost: input.cost,
+    product_id: input.product_id
 
   };
   var id = req.params.purchase_id;
@@ -86,8 +110,8 @@ exports.update = function(req, res, next) {
       res.redirect('/purchases');
     });
   });
+});
 };
-
 exports.delete = function(req, res, next) {
   var id = req.params.purchase_id;
   req.getConnection(function(err, connection) {

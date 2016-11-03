@@ -4,7 +4,7 @@ var express = require('express'),
   myConnection = require('express-myconnection'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
-  weeklyStats = require('./routes/weeklyStats')
+  // weeklyStats = require('./routes/weeklyStats')
 categories = require('./routes/categories'),
   products = require('./routes/products'),
   sales = require('./routes/sales'),
@@ -136,7 +136,7 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-app.get('/sales/:week', middleware.requiresLogin, weeklyStats.show);
+// app.get('/sales/:week', middleware.requiresLogin, weeklyStats.show);
 
 
 app.get('/categories', middleware.requiresLogin, categories.show);

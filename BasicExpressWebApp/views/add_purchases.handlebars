@@ -1,5 +1,5 @@
 <h1>Add Purchases</h1>
-
+ <p id='warning'>{{messages.warning}}</p>
 <form action="/purchases/add" method="POST">
 	{{#if is_admin}}
 	<div class="">
@@ -13,19 +13,19 @@
 	{{/if}}
 	<div>
 		<label for="">Shop Name</label>
-		<input type="text" name="shopName" value="{{shopName}}">
+		<input type="text" name="shopName" value="{{purchaseData.shopName}}">
 	</div>
 	<div>
 		<label for="">Date</label>
-		<input type="datetime-local" name="purchase_date" value="{{purchase_date}}">
+		<input type="date" name="purchase_date" value="{{purchaseData.purchase_date}}">
 	</div>
 	<div>
 		<label for="">Quantity</label>
-		<input type="number" name="quantity" value="{{quantity}}">
+		<input type="number" name="quantity" value="{{purchaseData.quantity}}">
 	</div>
 	<div>
 		<label for="">Price each</label>
-		<input type="number" name="cost" value="{{cost}}">
+		<input type="number" name="cost" value="{{purchaseData.purchaseDatacost}}">
 	</div>
 	<input type="submit">
 </form>
