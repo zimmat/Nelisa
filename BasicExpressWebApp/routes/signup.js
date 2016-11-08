@@ -12,6 +12,9 @@ exports.add = function(req, res, next) {
       password: req.body.password,
       confirmPassword: req.body.confirmPassword
     };
+    if(req.body.password !== req.body.confirmPassword){
+      req.flash("warning","password do not match");
+    }
 
     console.log(data);
     var password = req.body.password;
