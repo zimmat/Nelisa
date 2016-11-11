@@ -1,19 +1,23 @@
-<h1>Add product</h1>
 
-<form action="/products/add" method="POST">
-	<div class="">
-		<label for="">Category</label>
-
-		<select class="" name="category_id">
-			{{#categories}}
-				<option value="{{category_id}}">{{category_name}}</option>
-			{{/categories}}
-		</select>
+<div class="container">
+  <h1>Add product</h1>
+	<form action="/products/add" method="POST">
+			  <label for="email">Email:</label><br>
+			<select class="selectpicker" data-width="75%">
+				{{#categories}}
+					<option value="{{category_id}}">{{category_name}}</option>
+				{{/categories}}
+			</select>
 	</div>
+		 <div class="col-xs-3">
+    <div class="form-group">
+    		<label for="">Product Name</label>
+      <input type="text" class="form-control" value="{{product_name}}">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+</div>
 
-	<div>
-		<label for="">Product Name</label>
-		<input type="text" name="product_name" value="{{product_name}}">
-	</div>
-	<input type="submit">
-</form>
+</body>
+</html>

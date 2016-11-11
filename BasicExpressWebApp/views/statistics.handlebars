@@ -1,7 +1,15 @@
 
 <div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">Most Popular Product</h3> </div>
-  <div class="panel-body"> Product Name: </div>
-  <div class="panel-body"> Quantity: </div>
+  <div class="panel-heading"><h3 class="panel-title">Most Popular Product:</h3> </div>
+    {{#max}}
+  <div class="panel-body"> Product Name: {{product_name}} </div>
+  <div class="panel-body"> Quantity: {{quantity }} </div>
+  {{/max}}
 </div>
+{{#min}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Least Popular Product:</h3> </div>
+<div class="panel-body"> Product Name: {{product_name}}</div>
+<div class="panel-body"> Quantity: {{quantity}}</div>
+</div>
+{{/min}}
