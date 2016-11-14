@@ -13,3 +13,19 @@
 <div class="panel-body"> Quantity: {{quantity}}</div>
 </div>
 {{/min}}
+
+{{#profitable}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Most profitable Product:</h3> </div>
+<div class="panel-body"> Product Name: {{product_id}}</div>
+<div class="panel-body"> Quantity: {{profitable}}</div>
+</div>
+{{/profitable}}
+
+{{#leastProfitable}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Least profitable Product:</h3> </div>
+<div class="panel-body"> Product Name: {{product_id}}</div>
+<div class="panel-body"> Quantity: {{profitable}}</div>
+</div>
+{{/leastProfitable}}

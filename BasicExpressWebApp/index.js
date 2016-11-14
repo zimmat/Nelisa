@@ -176,7 +176,7 @@ app.get('/users/edit/:user_id', middleware.requiresLoginAsAdmin, users.get);
 app.post('/users/update/:users_id', middleware.requiresLoginAsAdmin, middleware.requiresLogin, users.update);
 app.get('/users/delete/:user_id', middleware.requiresLoginAsAdmin, users.delete);
 
-app.get('/quantity', middleware.requiresLoginAsAdmin,statistics.ProductsQuantity);
+// app.get('/quantity', middleware.requiresLoginAsAdmin,statistics.ProductsQuantity);
 app.get('/statistics', middleware.requiresLoginAsAdmin,statistics.MostpopularProduct);
 // app.get('/statistics', middleware.requiresLoginAsAdmin,statistics.LeastpopularProduct);
 
