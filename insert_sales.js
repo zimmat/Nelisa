@@ -31,9 +31,12 @@ conn.query("select * from products", function(err, products) {
     var product_name = myData[2];
     var no_sold = Number(myData[3]);
     var product_id = productNameByProductId[product_name];
-    var sales_price = Number(myData[4].replace("R", ''));
+    var price = myData[4].replace("R", '').replace(',','.');
+    var sales_price = Number(price).toFixed(2);
 salesValues.push([sales_date,no_sold, sales_price, product_id]);
+console.log(sales_price);
   });
+
 
   // console.log(salesValues);
   var sql = "insert into sales(sales_date,quantity,sales_price,product_id) VALUES ?";
