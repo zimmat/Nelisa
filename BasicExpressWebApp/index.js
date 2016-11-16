@@ -5,7 +5,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
   // weeklyStats = require('./routes/weeklyStats')
-categories = require('./routes/categories'),
+  categories = require('./routes/categories'),
   products = require('./routes/products'),
   sales = require('./routes/sales'),
   purchases = require('./routes/purchases'),
@@ -13,8 +13,8 @@ categories = require('./routes/categories'),
   flash = require('express-flash'),
   signup = require('./routes/signup'),
   statistics = require('./routes/statistics'),
-middleware = require('./middlewares/server'),
-bcrypt = require('bcrypt');
+  middleware = require('./middlewares/server'),
+  bcrypt = require('bcrypt');
 
 
 
@@ -31,7 +31,7 @@ var dbOptions = {
 var rolesMap = {
   "Nelisa": "admin",
   "Zee": "Viewer",
-  "Zimkhitha" : "admin"
+  "Zimkhitha": "admin"
 };
 
 //setup template handlebars as the template engine
@@ -81,7 +81,7 @@ var checkUser = function(req, res, next) {
   }
   res.redirect("/login");
 };
-app.post("/login", function(req, res) {
+app.post("/login", function(req, res, next) {
   var user1 = [];
   var password = req.body.password;
   if (req.body.username) {
@@ -92,29 +92,31 @@ app.post("/login", function(req, res) {
       // console.log(user.password);
     user1.push(user);
     req.getConnection(function(err, connection) {
-      connection.query('SELECT * FROM users', [], function(err, database) {
+      connection.query('SELECT * FROM users WHERE username = ?', [req.body.username], function(err, results) {
         if (err) return next(err);
-          bcrypt.compare(password, user.password, function(err, result) {
-            console.log(result);
+        if (results.length == 0) {
+          req.flash("warning","Register to proceed");
+          res.redirect("/login")
+        }
+        else{ bcrypt.compare(password, user.password, function(err, result) {
               req.session.user = {
                 name: req.body.username,
                 is_admin: rolesMap[req.body.username] === "admin",
                 user: rolesMap[req.body.username] === "Viewer"
               };
-              console.log(req.session.user);
+              // console.log(req.session.user);
               return res.redirect("/home");
             })
-            // if (dbUser.username === input.name && dbUser.password !== input.password) {
-            //   req.flash("warning", "wrong password");
-            //   return res.redirect('/login');
-            // }
-          });
-        });
-    }  else {
-        req.flash("warning", "all fields required");
-        return res.redirect('/login');
-      }
-  });
+          }
+      });
+    });
+
+
+  } else {
+    req.flash("warning", "all fields required");
+    return res.redirect('/login');
+  }
+});
 
 app.get("/home", checkUser, function(req, res) {
   res.render("home", {
@@ -177,11 +179,11 @@ app.post('/users/update/:users_id', middleware.requiresLoginAsAdmin, middleware.
 app.get('/users/delete/:user_id', middleware.requiresLoginAsAdmin, users.delete);
 
 // app.get('/quantity', middleware.requiresLoginAsAdmin,statistics.ProductsQuantity);
-app.get('/statistics', middleware.requiresLoginAsAdmin,statistics.MostpopularProduct);
+app.get('/statistics', middleware.requiresLoginAsAdmin, statistics.MostpopularProduct);
 // app.get('/statistics', middleware.requiresLoginAsAdmin,statistics.LeastpopularProduct);
 
-app.get('/signup',signup.showSignup);
-app.post('/signup/add',signup.add);
+app.get('/signup', signup.showSignup);
+app.post('/signup/add', signup.add);
 // app.get('')
 
 app.use(errorHandler);
