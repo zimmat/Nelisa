@@ -30,8 +30,8 @@ exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
 		var data = {
-			category_id : Number(req.body.category_id),
-      		product_name : req.body.product_name,
+			category_id :req.body.category_id,
+      		product_name : req.body.product_name
   		};
 
 		connection.query('insert into products set ?', data, function(err, results) {
@@ -69,7 +69,7 @@ exports.get = function(req, res, next){
 exports.update = function(req, res, next){
 
 	var data = {
-			category_id : Number(req.body.category_id),
+			category_id : req.body.category_id,
 					product_name : req.body.product_name,
 	};
   	var id = req.params.id;

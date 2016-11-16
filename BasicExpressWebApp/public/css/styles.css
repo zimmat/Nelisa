@@ -3,6 +3,8 @@
 }
 #text-align {
   text-align: center;
+  size : 1;
+  width: 300px
 }
 h2 {
   text-align: center;

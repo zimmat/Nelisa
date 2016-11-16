@@ -32,7 +32,9 @@ conn.query("select * from products", function(err, products) {
     var product_name = myData[2];
     var quantity = Number(myData[3]);
     var product_id = productNameByProductId[product_name];
-      var cost = parseFloat(myData[4].replace("R", ''));
+    var g = myData[4].replace("R", '').replace(',','.');
+    var cost = Number(g).toFixed(2);
+    console.log("parseFloat" + " " + cost + " " + "string" + g );
     var totalCost = parseFloat(myData[5].replace("R", ''));
 values.push([shop,date,quantity, cost,product_id]);
   });

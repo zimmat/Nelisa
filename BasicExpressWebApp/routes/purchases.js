@@ -51,6 +51,7 @@ exports.add = function(req, res, next) {
       cost: input.cost,
       product_id: input.product_id
     };
+    console.log(data);
     connection.query('insert into purchases set ?', data, function(err, results) {
       if (err)
           return next(err);

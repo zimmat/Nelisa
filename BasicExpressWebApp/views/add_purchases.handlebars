@@ -2,30 +2,29 @@
  <p id='warning'>{{messages.warning}}</p>
 <form action="/purchases/add" method="POST">
 	{{#if is_admin}}
-	<div class="">
+	<div class="col-xs-3" id="text-align">
 		<label for="">Product</label>
-		<select class="" name="product_id">
+		<select class="form-control" name="product_id">
 			{{#products}}
 				<option value="{{product_id}}">{{product_name}}</option>
 			{{/products}}
 		</select>
-	</div>
 	{{/if}}
 	<div>
 		<label for="">Shop Name</label>
-		<input type="text" name="shopName" value="{{purchaseData.shopName}}">
+		<input class="form-control" type="text" name="shopName" value="{{purchaseData.shopName}}">
 	</div>
 	<div>
 		<label for="">Date</label>
-		<input type="date" name="purchase_date" value="{{purchaseData.purchase_date}}">
+		<input class="form-control" type="date" name="purchase_date" value="{{purchaseData.purchase_date}}">
 	</div>
 	<div>
 		<label for="">Quantity</label>
-		<input type="number" name="quantity" value="{{purchaseData.quantity}}">
+		<input class="form-control" type="number" name="quantity" value="{{purchaseData.quantity}}">
 	</div>
 	<div>
 		<label for="">Price each</label>
-		<input type="number" name="cost" value="{{purchaseData.purchaseDatacost}}">
+		<input class="form-control" type="decimal" name="cost" value="{{purchaseData.purchaseDatacost}}">
 	</div>
-	<input type="submit">
+	  <button type="submit" class="btn btn-default">Submit</button>
 </form>

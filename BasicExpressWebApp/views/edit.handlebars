@@ -1,17 +1,17 @@
 <h1>Edit product</h1>
 <form action="/products/update/{{data.product_id}}" method="POST">
 	<div class="col-xs-3" id="text-align">
-	<label for="email">Category Name:</label>
+	<label for="category_name">Category Name:</label>
 	<br>
 
-	<select class="form-control"  size = "1" style="width:300px;">
+	<select class="form-control">
 		{{#categories}}
-			<option value="{{category_id}}" align="center">{{category_name}}</option>
+			<option value="{{data.category_id}}" align="center">{{category_name}}</option>
 		{{/categories}}
 	</select>
 <div class="form-group">
 	<label for="">Product Name</label>
-	<input type="text" class="form-control" value="{{product_name}}" style="width:300px;">
+	<input type="text" class="form-control" value="{{data.product_name}}">
 </div>
 <button type="submit" class="btn btn-default">Submit</button>
 </form>
