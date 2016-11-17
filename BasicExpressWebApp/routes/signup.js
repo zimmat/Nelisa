@@ -10,21 +10,21 @@ exports.add = function(req, res, next) {
     var data = {
       username: req.body.username,
       password: req.body.password,
-      confirmPassword: req.body.confirmPassword
+      confirmPassword :req.body.confirmPassword
     };
     if(req.body.password !== req.body.confirmPassword){
       req.flash("warning","password do not match");
-    }
+        res.redirect('/signup');
+    }else{
+      var password = req.body.password;
+      bcrypt.hash(password, 10, function(err, hash) {
+              data.password = hash;
 
-    console.log(data);
-    var password = req.body.password;
-    bcrypt.hash(password, 10, function(err, hash) {
-            data.password = hash;
-
-    connection.query('insert into users set ?', data, function(err, results) {
-      if (err) return next(err)
-      res.redirect('/login');
-});
+      connection.query('insert into users set ?', data, function(err, results) {
+        if (err) return next(err)
+        res.redirect('/login');
   });
+    });
+  };
 });
 };

@@ -1,12 +1,9 @@
-
-  <div class="header">
-    Register
-  </div>
+<div class="jumbotron"><h1>Signup</h1></div>
   <form action="/signup/add" method="POST">
   <div class="register">
-    <input type="text" name="username" value="{{username}}" placeholder="username">
-      <input type="password" value="{{password}}" placeholder="password">
-      <input type="password" value="{{confirmPassword}}" placeholder="confirm password"><br>
+    <input type="text" name="username"  placeholder="username">
+      <input type="password" name ="password" placeholder="password">
+      <input type="password" name = "confirmPassword"  placeholder="confirm password"><br>
        <p id='warning'>{{messages.warning}}</p>
   <input type="submit"><br>
   </div>
