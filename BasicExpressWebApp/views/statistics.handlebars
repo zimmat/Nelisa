@@ -17,15 +17,46 @@
 {{#profitable}}
 <div class="panel panel-info">
   <div class="panel-heading"><h3 class="panel-title">Most profitable Product:</h3> </div>
-<div class="panel-body"> Product Id: {{product_id}}</div>
-<div class="panel-body"> Quantity: {{profitable}}</div>
+<div class="panel-body"> Product Name {{product_name}}</div>
+<div class="panel-body"> Profit: {{profitable}}</div>
 </div>
 {{/profitable}}
 
 {{#leastProfitable}}
 <div class="panel panel-info">
   <div class="panel-heading"><h3 class="panel-title">Least profitable Product:</h3> </div>
-<div class="panel-body"> Product Id: {{product_id}}</div>
-<div class="panel-body"> Quantity: {{profitable}}</div>
+<div class="panel-body"> Product Name: {{product_name}}</div>
+<div class="panel-body"> Profit: {{profitable}}</div>
 </div>
 {{/leastProfitable}}
+{{#mostPopularCategory}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Most populular Category:</h3> </div>
+<div class="panel-body"> Category Name: {{category_name}}</div>
+<div class="panel-body"> Quantity: {{quantity}}</div>
+</div>
+{{/mostPopularCategory}}
+
+{{#leastPopularCategory}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Least populular Category:</h3> </div>
+<div class="panel-body"> Category Name: {{category_name}}</div>
+<div class="panel-body"> Quantity: {{quantity}}</div>
+</div>
+{{/leastPopularCategory}}
+
+{{#mostProfitableCategory}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Most populular Category:</h3> </div>
+<div class="panel-body"> Category Name: {{category_name}}</div>
+<div class="panel-body"> Quantity: {{quantity}}</div>
+</div>
+{{/mostProfitableCategory}}
+
+{{#leastProfitableCategory}}
+<div class="panel panel-info">
+  <div class="panel-heading"><h3 class="panel-title">Least populular Category:</h3> </div>
+<div class="panel-body"> Category Name: {{category_name}}</div>
+<div class="panel-body"> Quantity: {{quantity}}</div>
+</div>
+{{/leastProfitableCategory}}
