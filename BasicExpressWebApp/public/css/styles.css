@@ -1,6 +1,11 @@
 .jumbotron {
   text-align: center;
 }
+#warning {
+  text-align: center;
+  font: bold;
+  color : red;
+}
 #text-align {
   text-align: center;
   size : 1;

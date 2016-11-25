@@ -1,62 +1,107 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+          {{#max}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Most Popular Product:</h3> </div>
+              <div class="panel-body"> Product Name {{product_name}}</div>
+              <div class="panel-body"> Quantity: {{quantity}}</div>
+            </div>
+          {{/max}}
 
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Most Popular Product:</h3> </div>
-    {{#max}}
-  <div class="panel-body"> Product Name: {{product_name}} </div>
-  <div class="panel-body"> Quantity: {{quantity }} </div>
-  {{/max}}
-</div>
-{{#min}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Least Popular Product:</h3> </div>
-<div class="panel-body"> Product Name: {{product_name}}</div>
-<div class="panel-body"> Quantity: {{quantity}}</div>
-</div>
-{{/min}}
+        </div>
+        <div class="col-xs-6">
+          {{#min}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Least Popular Product:</h3> </div>
+              <div class="panel-body"> Product Name {{product_name}}</div>
+              <div class="panel-body"> Quantity:  {{quantity}}</div>
+            </div>
+          {{/min}}
 
-{{#profitable}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Most profitable Product:</h3> </div>
-<div class="panel-body"> Product Name {{product_name}}</div>
-<div class="panel-body"> Profit: {{profitable}}</div>
+        </div>
+    </div>
 </div>
-{{/profitable}}
 
-{{#leastProfitable}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Least profitable Product:</h3> </div>
-<div class="panel-body"> Product Name: {{product_name}}</div>
-<div class="panel-body"> Profit: {{profitable}}</div>
-</div>
-{{/leastProfitable}}
-{{#mostPopularCategory}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Most populular Category:</h3> </div>
-<div class="panel-body"> Category Name: {{category_name}}</div>
-<div class="panel-body"> Quantity: {{quantity}}</div>
-</div>
-{{/mostPopularCategory}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+          {{#profitable}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Most Profitable Product:</h3> </div>
+              <div class="panel-body"> Product Name {{product_name}}</div>
+              <div class="panel-body"> Profit: R {{profitable}}</div>
+            </div>
+          {{/profitable}}
 
-{{#leastPopularCategory}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Least populular Category:</h3> </div>
-<div class="panel-body"> Category Name: {{category_name}}</div>
-<div class="panel-body"> Quantity: {{quantity}}</div>
-</div>
-{{/leastPopularCategory}}
+        </div>
+        <div class="col-xs-6">
+          {{#leastProfitable}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Least profitable Product:</h3> </div>
+              <div class="panel-body"> Product Name {{product_name}}</div>
+              <div class="panel-body"> Profit: R {{profitable}}</div>
+            </div>
+          {{/leastProfitable}}
 
-{{#mostProfitableCategory}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Most populular Category:</h3> </div>
-<div class="panel-body"> Category Name: {{category_name}}</div>
-<div class="panel-body"> Quantity: {{quantity}}</div>
+        </div>
+    </div>
 </div>
-{{/mostProfitableCategory}}
 
-{{#leastProfitableCategory}}
-<div class="panel panel-info">
-  <div class="panel-heading"><h3 class="panel-title">Least populular Category:</h3> </div>
-<div class="panel-body"> Category Name: {{category_name}}</div>
-<div class="panel-body"> Quantity: {{quantity}}</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6">
+          {{#mostPopularCategory}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Most populular Category:</h3> </div>
+              <div class="panel-body"> Category Name: {{category_name}}</div>
+              <div class="panel-body"> Quantity: {{quantity}}</div>
+            </div>
+          {{/mostPopularCategory}}
+
+        </div>
+        <div class="col-xs-6">
+          {{#leastPopularCategory}}
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Least populular Category:</h3> </div>
+              <div class="panel-body"> Category Name: {{category_name}}</div>
+              <div class="panel-body"> Quantity: {{quantity}}</div>
+            </div>
+          {{/leastPopularCategory}}
+        </div>
+    </div>
 </div>
-{{/leastProfitableCategory}}
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+      {{#mostProfitableCategory}}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Least Profitable Category:</h3> </div>
+          <div class="panel-body"> Category Name: {{category_name}}</div>
+          <div class="panel-body"> Profit: R {{leastProfitable}}</div>
+        </div>
+      {{/mostProfitableCategory}}
+</div>
+<div class="col-xs-6">
+      {{#leastProfitableCategory}}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Least Profitable Category:</h3> </div>
+          <div class="panel-body"> Category Name: {{category_name}}</div>
+          <div class="panel-body"> Profit: R {{leastProfitable}}</div>
+        </div>
+      {{/leastProfitableCategory}}
+
+
+        </div>
+    </div>
+</div>

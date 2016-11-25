@@ -82,40 +82,49 @@ var checkUser = function(req, res, next) {
   res.redirect("/login");
 };
 app.post("/login", function(req, res, next) {
-  var user1 = [];
-  var password = req.body.password;
-  if (req.body.username) {
-    var user = {
-        name: req.body.username,
-        password: req.body.password,
-      }
-      // console.log(user.password);
-    user1.push(user);
-    req.getConnection(function(err, connection) {
-      connection.query('SELECT * FROM users WHERE username = ?', [req.body.username], function(err, results) {
-        if (err) return next(err);
-        if (results.length == 0) {
-          req.flash("warning","Register to proceed");
-          res.redirect("/login")
-        }
-        else{ bcrypt.compare(password, user.password, function(err, result) {
-              req.session.user = {
-                name: req.body.username,
-                is_admin: rolesMap[req.body.username] === "admin",
-                user: rolesMap[req.body.username] === "Viewer"
-              };
-              // console.log(req.session.user);
-              return res.redirect("/home");
-            })
+  var user = {
+    name: req.body.username,
+    password: req.body.password,
+  }
+
+
+  console.log('req.body : ');
+  console.log(req.body);
+
+
+  req.getConnection(function(err, connection) {
+    connection.query('SELECT * FROM users WHERE username = ?', [user.name], function(err, results) {
+      if (err) return next(err);
+      if (results.length == 0) {
+        req.flash("warning", "Register to proceed");
+        res.redirect("/login")
+      } else {
+
+        console.log(results);
+        var encryptedPassword = results[0];
+        console.log("encryptedPassword :", encryptedPassword);
+        console.log("passwords :", user.password);
+        bcrypt.compare(user.password, encryptedPassword.password, function(err, pass) {
+          if (err) return next(err);
+          console.log('pass : ' + pass);
+
+          if (pass) {
+            req.session.user = {
+              name: req.body.username,
+              is_admin: rolesMap[req.body.username] === "admin",
+              user: rolesMap[req.body.username] === "Viewer"
+            }
+            req.flash("warning", "Welcome to Nelisa Spaza Shop");
+            res.redirect("/home");
+          } else {
+            req.flash("warning", "incorrect password");
+            return res.redirect("/login");
           }
-      });
+        })
+      }
     });
 
-
-  } else {
-    req.flash("warning", "all fields required");
-    return res.redirect('/login');
-  }
+  });
 });
 
 app.get("/home", checkUser, function(req, res) {
