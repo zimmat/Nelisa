@@ -25,7 +25,7 @@ exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     var data = {
-      username: req.body.username,
+      name: req.body.name,
       password: req.body.password,
 			Role: req.body.Role,
 

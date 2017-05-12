@@ -8,10 +8,11 @@ exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);
     var data = {
-      username: req.body.username,
-      password: req.body.password,
-      confirmPassword :req.body.confirmPassword
+      name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
     };
+    var confirmPassword = req.body.confirmPassword;
     if(req.body.password !== req.body.confirmPassword){
       req.flash("warning","password do not match");
         res.redirect('/signup');
